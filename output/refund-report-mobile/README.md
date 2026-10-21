@@ -9,3 +9,7 @@
 此文件包含最新确认的设计与文案，CSS、JavaScript、图标和缩略图均已内嵌。数据为演示数据，未连接业务后台。GitHub 文件页面显示源代码；下载后可查看交互界面。
 
 图标及缩略图的来源与许可见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+
+## Sketch 设计稿
+
+[下载可编辑 Sketch 文件](sketch/refund-report-mobile.sketch) · [查看画板预览与使用说明](sketch/README.md)。包含 14 个页面与弹层状态，保留可编辑文字、卡片、图表和图标。
