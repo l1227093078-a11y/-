@@ -1017,7 +1017,7 @@ function drawPm(){
 function drawDate(){
   $('#dBody').innerHTML='<label class="dl" for="ds"><span>开始</span><input type="date" id="ds" value="'+isoOf(tmp.cs)+'" min="'+isoOf(59)+'" max="'+isoOf(0)+'" required></label>'+
     '<label class="dl" for="de"><span>结束</span><input type="date" id="de" value="'+isoOf(tmp.ce)+'" min="'+isoOf(59)+'" max="'+isoOf(0)+'" required></label>'+
-    '<div class="hintline">可查询近 60 天，开始日期不可晚于结束日期，支持查看单日。</div><div id="dateError" class="form-error" role="alert"></div>';
+    '<div class="hintline">可查询近 3 个月，开始日期不可晚于结束日期，支持查看单日。</div><div id="dateError" class="form-error" role="alert"></div>';
   ['ds','de'].forEach(id=>$('#'+id).oninput=()=>{$('#dateError').textContent='';$('#'+id).removeAttribute('aria-invalid');});
 }
 
