@@ -100,6 +100,10 @@ button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:default}b
   .thumb{width:48px;height:52px}.prow{gap:8px}.dbd{padding-left:16px;padding-right:16px}.pname{font-size:14px}.srow{padding-left:14px;gap:7px}.srow .pc{margin-right:0}.allrow{gap:7px}
 }
 
+/* Product manager multi-select shares the store selection controls. */
+.drawer[data-mode=pm] .allrow{flex-wrap:wrap;row-gap:6px}
+.drawer[data-mode=pm] .allrow .qk{border:0;background:none;padding:4px 0;font:inherit;font-size:13px;color:var(--pri);cursor:pointer}
+.drawer[data-mode=pm] .selbar{margin-top:11px}
 /* Shared category / market hierarchy report components. */
 .card.entry-card{padding:16px}
 .entry-card .ents{gap:10px;margin-top:12px}
@@ -957,17 +961,21 @@ function drawMarket(){
   });
 }
 
-/* --- 产品经理 --- */
+/* --- 产品经理（多选，与门店一致） --- */
 function drawPm(){
   const b=$('#dBody');
   const kw=(tmp.kw||'').trim();
-  const list=PMS.filter(u=>!kw||u.name.includes(kw));
+  const allOn=tmp.pm.length===PMS.length;
+  const list=PMS.filter(u=>!kw||u.name.includes(kw)||tmp.pm.includes(u.id));
   let h='<div class="srchw"><span class="ic">'+icon('search')+'</span><input id="uSearch" placeholder="搜索产品经理姓名" value="'+esc(kw)+'"></div>';
+  h+='<div class="allrow" data-pm-all="1" role="checkbox" tabindex="0" aria-checked="'+(allOn?'true':(tmp.pm.length?'mixed':'false'))+'" aria-label="全选所有产品经理"><span class="cbox '+(allOn?'on':(tmp.pm.length?'half':''))+'">'+(allOn?icon('check'):'')+'</span>'+
+     '<span class="tx">全选所有产品经理</span><span class="cnt">共 '+PMS.length+' 位</span>'+
+     '<button type="button" class="qk" data-pm-qk="1">一键全选</button></div>';
   h+='<div class="selbar">'+(tmp.pm.length?('已选 '+tmp.pm.length+' 位产品经理'):'')+'</div>';
   h+=list.length?list.map(u=>{
     const on=tmp.pm.includes(u.id);
     const n=PRODUCTS.filter(p=>p.u===u.id).length;
-    return '<div class="urow" data-u="'+u.id+'">'+
+    return '<div class="urow" data-u="'+u.id+'" role="checkbox" tabindex="0" aria-checked="'+on+'" aria-label="'+esc(u.name)+'">'+
       '<span class="uav">'+u.name.slice(0,1)+'</span>'+
       '<div class="uinfo"><div class="unm">'+u.name+'</div><div class="uct">负责 '+n+' 个商品</div></div>'+
       '<span class="cbox '+(on?'on':'')+'">'+(on?icon('check'):'')+'</span></div>';
@@ -980,10 +988,27 @@ function drawPm(){
     drawPm();
     const n=$('#uSearch');n.focus();n.setSelectionRange(n.value.length,n.value.length);
   };
+  b.querySelector('[data-pm-qk]').onclick=e=>{
+    e.stopPropagation();
+    tmp.pm=PMS.map(u=>u.id);
+    drawPm();
+    b.querySelector('[data-pm-qk]').focus({preventScroll:true});
+  };
+  b.querySelector('[data-pm-all]').onclick=e=>{
+    if(e.target.closest('[data-pm-qk]'))return;
+    tmp.pm=tmp.pm.length===PMS.length?[]:PMS.map(u=>u.id);
+    drawPm();
+    b.querySelector('[data-pm-all]').focus({preventScroll:true});
+  };
+  b.querySelectorAll('[role="checkbox"]').forEach(el=>el.onkeydown=e=>{
+    if(e.target!==el)return;
+    if(e.key===' '||e.key==='Enter'){e.preventDefault();el.click();}
+  });
   b.querySelectorAll('[data-u]').forEach(el=>el.onclick=()=>{
     const id=el.dataset.u,i=tmp.pm.indexOf(id);
     if(i>-1)tmp.pm.splice(i,1);else tmp.pm.push(id);
     drawPm();
+    (b.querySelector('[data-u="'+id+'"]')||$('#uSearch')).focus({preventScroll:true});
   });
 }
 
