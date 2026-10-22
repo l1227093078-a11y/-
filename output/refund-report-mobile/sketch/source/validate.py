@@ -6,7 +6,7 @@ import jsonschema
 ROOT=Path(__file__).resolve().parent.parent
 schema_dir=Path(sys.argv[1]) if len(sys.argv)>1 else ROOT/'source/node_modules/@sketch-hq/sketch-file-format/dist'
 manifest=json.loads((ROOT/'source/manifest.json').read_text())
-assert hashlib.sha256((ROOT.parent/'index.html').read_bytes()).hexdigest()==manifest['sourceSha256']
+assert hashlib.sha256((ROOT.parent/'refund.html').read_bytes()).hexdigest()==manifest['sourceSha256']
 with zipfile.ZipFile(ROOT/'refund-report-mobile.sketch') as z:
  assert z.testzip() is None
  objects={n:json.loads(z.read(n)) for n in z.namelist() if n.endswith('.json')}

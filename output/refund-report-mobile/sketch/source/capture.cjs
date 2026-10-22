@@ -2,7 +2,7 @@
 const fs=require('node:fs'),path=require('node:path');
 const {chromium}=require('playwright');
 const ROOT=path.resolve(__dirname,'..');
-const HTML=path.resolve(ROOT,'../index.html');
+const HTML=path.resolve(ROOT,'../refund.html');
 const scenarios=[
   {id:'home-line',name:'01 首页 · 折线图（完整）',full:true},
   {id:'home-bar',name:'02 首页 · 柱状图（完整）',full:true,chart:'bar'},

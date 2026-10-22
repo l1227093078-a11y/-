@@ -2,7 +2,7 @@
 
 [下载 Sketch 文件](refund-report-mobile.sketch)（在 GitHub 文件页面点击 **Download raw file**），使用 macOS 的 Sketch 打开。
 
-基于上一级目录的最终版 [HTML 原型](../index.html) 制作，375px 手机布局，共 14 个画板：
+基于上一级目录的最终版 [HTML 原型](../refund.html) 制作，375px 手机布局，共 14 个画板：
 
 - 完整首页：折线图、柱状图，以及图表横滑至末尾的状态。
 - 按商品、商品分类、产品经理、市场/门店统计，以及门店明细。
