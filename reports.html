@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#fbf8fe">
+<meta name="description" content="经营报表入口，查看退货金额统计。">
+<title>经营报表</title>
+<style>
+:root{color-scheme:light;--green:#00b777;--ink:#38373c;--background:#fbf8fe}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:#edf3ee;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+button,a{font:inherit;touch-action:manipulation}button{cursor:pointer}button:focus-visible,a:focus-visible{outline:2px solid #00874d;outline-offset:4px}svg{display:block;flex:none;pointer-events:none}
+.stage{min-height:100svh;display:flex;align-items:flex-start;justify-content:center;padding:36px 20px 24px}
+.phone{width:414px;height:894px;flex:none;background:var(--background);border:7px solid #fff;border-radius:39px;box-shadow:0 0 0 1px #d8e3dc,0 22px 55px #28483112;position:relative;display:flex;flex-direction:column;overflow:clip;isolation:isolate}
+.statusbar{height:34px;flex:none;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:5px 22px 0;font-size:13px;font-weight:600;letter-spacing:.2px;color:#25392d}.status-icons{display:flex;gap:5px;align-items:center}.status-icons svg{width:12px;height:12px;stroke-width:1.7}
+.report-nav{height:48px;flex:none;position:relative;display:flex;align-items:center;padding:0 14px;background:#fff}
+.report-nav h1{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);margin:0;font-size:20px;line-height:1.5;font-weight:650;letter-spacing:.5px;white-space:nowrap}
+.report-back{width:40px;height:44px;margin-left:-5px;border:0;padding:7px;background:none;color:#38373c;display:flex;align-items:center;justify-content:center}.report-back svg{width:26px;height:26px;stroke-width:1.7}
+.report-content{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:16px 17px 36px;scrollbar-width:none}.report-content::-webkit-scrollbar{width:0}
+.report-list{display:flex;flex-direction:column;gap:12px}
+.report-row{display:flex;align-items:center;gap:12px;min-height:64px;width:100%;padding:10px 12px;border:0;border-radius:9px;background:#fff;text-align:left;text-decoration:none;color:#68676c;transition:background .15s,transform .15s}
+.report-icon{width:43px;height:43px;border-radius:15px;flex:none;display:flex;align-items:center;justify-content:center;background:var(--green);color:#fff;box-shadow:-3px 2px 0 #00b77719,3px -2px 0 #00b77715}
+.report-icon svg{width:29px;height:29px;stroke-width:1.85}.report-name{flex:1;min-width:0;font-size:17px;line-height:1.5;font-weight:500;letter-spacing:.2px;overflow-wrap:anywhere}.report-chevron{color:#77757d}.report-chevron svg{width:18px;height:18px;stroke-width:1.7}
+.report-row:active{background:#f1fbf6;transform:scale(.992)}
+.home-indicator{position:absolute;bottom:0;left:0;right:0;height:20px;background:#fbf8fef5;display:flex;justify-content:center;align-items:center;pointer-events:none}.home-indicator span{width:108px;height:4px;border-radius:4px;background:#1d3b29}
+.report-toast{position:absolute;z-index:5;left:50%;bottom:48px;transform:translate(-50%,8px);max-width:calc(100% - 32px);padding:11px 16px;border-radius:10px;color:#fff;background:#343239eb;line-height:1.6;font-size:13px;text-align:center;opacity:0;pointer-events:none;transition:opacity .18s,transform .18s;white-space:nowrap}.report-toast.show{opacity:1;transform:translate(-50%,0)}
+@media(hover:hover){.report-row:hover{background:#f1fbf6}.report-back:hover{color:#00874d}}
+@media(max-width:460px){body{background:var(--background)}.stage{padding:0;min-height:100dvh}.phone{width:100%;height:100dvh;min-height:560px;border:0;border-radius:0;box-shadow:none}.home-indicator{height:max(20px,env(safe-area-inset-bottom))}.report-content{padding-bottom:max(36px,calc(env(safe-area-inset-bottom) + 20px))}}
+@media(max-width:360px){.report-content{padding:14px 14px 32px}.report-list{gap:10px}.report-row{gap:10px;min-height:62px;padding:9px 10px}.report-icon{width:40px;height:40px;border-radius:14px}.report-icon svg{width:27px;height:27px}.report-name{font-size:15px;letter-spacing:0}.report-nav h1{font-size:19px}}
+@media(prefers-reduced-motion:reduce){.report-row,.report-toast{transition:none}}
+</style>
+</head>
+<body>
+<div class="stage"><div class="phone">
+    <div class="statusbar" aria-hidden="true"><span>09:41</span><div class="status-icons"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path stroke="none" d="M0 0h24v24H0z" fill="none"/> <path d="M6 18l0 -3" /> <path d="M10 18l0 -6" /> <path d="M14 18l0 -9" /> <path d="M18 18l0 -12" /> </svg><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path stroke="none" d="M0 0h24v24H0z" fill="none"/> <path d="M12 18l.01 0" /> <path d="M9.172 15.172a4 4 0 0 1 5.656 0" /> <path d="M6.343 12.343a8 8 0 0 1 11.314 0" /> <path d="M3.515 9.515c4.686 -4.687 12.284 -4.687 17 0" /> </svg><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path stroke="none" d="M0 0h24v24H0z" fill="none"/> <path d="M6 7h11a2 2 0 0 1 2 2v.5a.5 .5 0 0 0 .5 .5a.5 .5 0 0 1 .5 .5v3a.5 .5 0 0 1 -.5 .5a.5 .5 0 0 0 -.5 .5v.5a2 2 0 0 1 -2 2h-11a2 2 0 0 1 -2 -2v-6a2 2 0 0 1 2 -2" /> <path d="M7 10l0 4" /> <path d="M10 10l0 4" /> <path d="M13 10l0 4" /> </svg></div></div>
+<header class="report-nav"><button type="button" class="report-back" id="reportsBack" aria-label="返回上一页"><svg aria-hidden="true"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left"
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M15 6l-6 6l6 6" />
+</svg></button><h1>经营报表</h1></header>
+<main class="report-content" aria-label="经营报表列表"><nav class="report-list" aria-label="报表类型">
+<button type="button" class="report-row" data-report="实际到账金额"><span class="report-icon"><svg aria-hidden="true"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon icon-tabler icons-tabler-outline icon-tabler-wallet"
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M17 8v-3a1 1 0 0 0 -1 -1h-10a2 2 0 0 0 0 4h12a1 1 0 0 1 1 1v3m0 4v3a1 1 0 0 1 -1 1h-12a2 2 0 0 1 -2 -2v-12" />
+  <path d="M20 12v4h-4a2 2 0 0 1 0 -4h4" />
+</svg></span><span class="report-name">实际到账金额</span><span class="report-chevron"><svg aria-hidden="true"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 6l6 6l-6 6" />
+</svg></span></button>
+<button type="button" class="report-row" data-report="系统中实际成交金额"><span class="report-icon"><svg aria-hidden="true"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon icon-tabler icons-tabler-outline icon-tabler-cash-banknote"
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+  <path d="M3 8a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
+  <path d="M18 12h.01" />
+  <path d="M6 12h.01" />
+</svg></span><span class="report-name">系统中实际成交金额</span><span class="report-chevron"><svg aria-hidden="true"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 6l6 6l-6 6" />
+</svg></span></button>
+<button type="button" class="report-row" data-report="实际取货金额"><span class="report-icon"><svg aria-hidden="true"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon icon-tabler icons-tabler-outline icon-tabler-package"
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5" />
+  <path d="M12 12l8 -4.5" />
+  <path d="M12 12l0 9" />
+  <path d="M12 12l-8 -4.5" />
+  <path d="M16 5.25l-8 4.5" />
+</svg></span><span class="report-name">实际取货金额</span><span class="report-chevron"><svg aria-hidden="true"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 6l6 6l-6 6" />
+</svg></span></button>
+<a class="report-row" id="refundReport" href="index.html"><span class="report-icon"><svg aria-hidden="true"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon icon-tabler icons-tabler-outline icon-tabler-receipt-refund"
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16l-3 -2l-2 2l-2 -2l-2 2l-2 -2l-3 2" />
+  <path d="M15 14v-2a2 2 0 0 0 -2 -2h-4l2 -2m0 4l-2 -2" />
+</svg></span><span class="report-name">退货金额统计</span><span class="report-chevron"><svg aria-hidden="true"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 6l6 6l-6 6" />
+</svg></span></a>
+<button type="button" class="report-row" data-report="会员活跃度统计"><span class="report-icon"><svg aria-hidden="true"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon icon-tabler icons-tabler-outline icon-tabler-user"
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg></span><span class="report-name">会员活跃度统计</span><span class="report-chevron"><svg aria-hidden="true"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 6l6 6l-6 6" />
+</svg></span></button>
+<button type="button" class="report-row" data-report="会员积分/优惠券统计"><span class="report-icon"><svg aria-hidden="true"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon icon-tabler icons-tabler-outline icon-tabler-discount"
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 15l6 -6" />
+  <circle cx="9.5" cy="9.5" r=".5" fill="currentColor" />
+  <circle cx="14.5" cy="14.5" r=".5" fill="currentColor" />
+  <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+</svg></span><span class="report-name">会员积分/优惠券统计</span><span class="report-chevron"><svg aria-hidden="true"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 6l6 6l-6 6" />
+</svg></span></button>
+<button type="button" class="report-row" data-report="门店库存统计"><span class="report-icon"><svg aria-hidden="true"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon icon-tabler icons-tabler-outline icon-tabler-building-store"
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M3 21l18 0" />
+  <path d="M3 7v1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1h-18l2 -4h14l2 4" />
+  <path d="M5 21l0 -10.15" />
+  <path d="M19 21l0 -10.15" />
+  <path d="M9 21v-4a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v4" />
+</svg></span><span class="report-name">门店库存统计</span><span class="report-chevron"><svg aria-hidden="true"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 6l6 6l-6 6" />
+</svg></span></button>
+<button type="button" class="report-row" data-report="仓库库存统计"><span class="report-icon"><svg aria-hidden="true"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon icon-tabler icons-tabler-outline icon-tabler-building-warehouse"
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M3 21v-13l9 -4l9 4v13" />
+  <path d="M13 13h4v8h-10v-6h6" />
+  <path d="M13 21v-9a1 1 0 0 0 -1 -1h-2a1 1 0 0 0 -1 1v3" />
+</svg></span><span class="report-name">仓库库存统计</span><span class="report-chevron"><svg aria-hidden="true"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 6l6 6l-6 6" />
+</svg></span></button>
+</nav></main>
+<div class="home-indicator" aria-hidden="true"><span></span></div>
+<div class="report-toast" id="reportToast" role="status" aria-live="polite"></div>
+</div></div>
+<script>
+let reportToastTimer;
+document.querySelector('#reportsBack').onclick=()=>window.history.back();
+document.querySelectorAll('[data-report]').forEach(button=>button.onclick=()=>{
+ const toast=document.querySelector('#reportToast');clearTimeout(reportToastTimer);
+ toast.textContent='该报表暂未开放';toast.classList.add('show');reportToastTimer=setTimeout(()=>toast.classList.remove('show'),2200);
+});
+</script>
+<!-- Icons: Tabler Icons 3.35.0, MIT. See THIRD_PARTY_NOTICES.md. -->
+</body>
+</html>
