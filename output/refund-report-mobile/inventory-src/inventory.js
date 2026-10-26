@@ -3,7 +3,7 @@ const $=s=>document.querySelector(s);
 const icon=name=>SHARED.icons[name]||'';
 const esc=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const CATEGORIES=[{id:'care',name:'护肤用品',children:[{id:'cream',name:'面霜'},{id:'clean',name:'清洁用品'}]},{id:'baby',name:'母婴服饰',children:[{id:'onesie',name:'连体衣'},{id:'sleep',name:'睡袋'},{id:'outer',name:'外出服'}]},{id:'feeding',name:'喂养用品',children:[{id:'bottle',name:'奶瓶奶嘴'}]}];
-const MANAGERS=[{id:'u1',name:'张明'},{id:'u2',name:'李婷'},{id:'u3',name:'王芳'},{id:'u4',name:'陈晨'}];
+const MANAGERS=[{id:'u1',name:'李红彩'},{id:'u2',name:'仝钢'},{id:'u3',name:'苗艳霞'},{id:'u4',name:'陈晨'}];
 const WAREHOUSES=[{id:'w1',name:'青岛分仓',market:'华东市场'},{id:'w2',name:'天津分仓',market:'华北市场'},{id:'w3',name:'邯郸分仓',market:'华北市场'},{id:'w4',name:'武汉分仓',market:'华中市场'},{id:'w5',name:'合肥分仓',market:'华东市场'}];
 const STORES=[{id:'s11',name:'上海南京西路店',w:'w1'},{id:'s12',name:'杭州西湖银泰店',w:'w1'},{id:'s21',name:'北京丰台智选店',w:'w2'},{id:'s22',name:'天津和平恒隆店',w:'w2'},{id:'s31',name:'邯郸万达广场店',w:'w3'},{id:'s32',name:'石家庄长安店',w:'w3'},{id:'s41',name:'武汉光谷天地店',w:'w4'},{id:'s42',name:'武汉江汉路店',w:'w4'},{id:'s51',name:'合肥银泰中心店',w:'w5'},{id:'s52',name:'芜湖镜湖万达店',w:'w5'}];
 const PRODUCTS=[
@@ -20,8 +20,8 @@ const PRODUCTS=[
 {id:'p11',name:'硅胶安抚奶嘴',category:'bottle',spec:'S号 / 浅绿',unit:'个',type:'standard',sku:'B20000001000000011',price:39,image:'bottle'},
 {id:'p12',name:'婴儿有机棉长袖连体衣',category:'onesie',spec:'66码 / 纯白',unit:'件',type:'nonstandard',sku:'B20000001000000012',price:159,image:'baby'}];
 const PMAP=Object.fromEntries(PRODUCTS.map(p=>[p.id,p])),WMAP=Object.fromEntries(WAREHOUSES.map(w=>[w.id,w])),SMAP=Object.fromEntries(STORES.map(s=>[s.id,s])),UMAP=Object.fromEntries(MANAGERS.map(u=>[u.id,u]));
-const STOCKS=PRODUCTS.flatMap((p,pi)=>WAREHOUSES.map((w,wi)=>({p:p.id,w:w.id,u:MANAGERS[(pi+wi)%MANAGERS.length].id,warehouse:pi===0&&wi===0?1000:100+((pi*83+wi*139)%1300),supplier:pi===0&&wi===0?1975:500+((pi*197+wi*101)%2400)})));
-const STORE_STOCKS=PRODUCTS.flatMap((p,pi)=>STORES.map((s,si)=>({p:p.id,s:s.id,w:s.w,u:STOCKS.find(r=>r.p===p.id&&r.w===s.w).u,quantity:pi===0?0:(pi*37+si*11)%183})));
+const STOCKS=PRODUCTS.flatMap((p,pi)=>WAREHOUSES.map((w,wi)=>({p:p.id,w:w.id,u:MANAGERS[(pi+wi)%MANAGERS.length].id,warehouse:pi===0&&wi===0?1000:100+((pi*83+wi*139)%1300),supplier:pi===0&&wi===0?1975:500+((pi*197+wi*101)%2400),pendingPickup:pi===0&&wi===0?100:10+((pi*11+wi*7)%75),retained:pi===0&&wi===0?200:20+((pi*19+wi*13)%90)})));
+const STORE_STOCKS=PRODUCTS.flatMap((p,pi)=>STORES.map((s,si)=>({p:p.id,s:s.id,w:s.w,u:STOCKS.find(r=>r.p===p.id&&r.w===s.w).u,quantity:pi===0?0:(pi*37+si*11)%183,pendingPickup:pi===0?0:Math.floor(((pi*37+si*11)%183)/4)})));
 const ACCOUNTS={
 store:{name:'门店账号',stores:['s11'],warehouses:['w1'],modes:['stores'],initial:'stores'},
 region:{name:'区域账号',stores:['s11','s12','s51','s52'],warehouses:['w1','w5'],modes:['stores'],initial:'stores'},
@@ -53,6 +53,12 @@ function visibleProducts(){return PRODUCTS.filter(p=>{
  if(state.productMode==='category'&&state.categories.length&&!state.categories.includes(p.category))return false;
  const rows=productRows(p);return state.mode==='stores'?rows.stores.length>0:state.mode==='warehouses'?rows.warehouses.length>0:rows.stores.length+rows.warehouses.length>0;
 });}
+function inventoryMetrics(p){
+ const rows=productRows(p),sum=(list,key)=>list.reduce((total,row)=>total+(row[key]||0),0);
+ const totalPhysical=(state.mode==='stores'?0:sum(rows.warehouses,'warehouse'))+(state.mode==='warehouses'?0:sum(rows.stores,'quantity'));
+ const pendingPickup=(state.mode==='stores'?0:sum(rows.warehouses,'pendingPickup'))+(state.mode==='warehouses'?0:sum(rows.stores,'pendingPickup'));
+ return {totalPhysical,pendingPickup,retained:sum(rows.warehouses,'retained'),supplierZone:sum(rows.warehouses,'supplier')};
+}
 function amount(n,unit){return Number(n).toLocaleString('zh-CN')+unit;}
 function chips(names){if(!names.length)return '<span>请选择</span>';return '<span class="chip">'+esc(names[0])+'</span>'+(names.length>1?'<span class="chip more">+'+(names.length-1)+'</span>':'');}
 function managerNames(p){const rows=productRows(p);return unique((state.mode==='stores'?rows.stores:state.mode==='warehouses'?rows.warehouses:[...rows.warehouses,...rows.stores]).map(r=>r.u));}
@@ -65,10 +71,9 @@ function render(){
  $('#typeTabs').querySelectorAll('[data-type]').forEach(b=>{b.classList.toggle('on',b.dataset.type===state.type);b.setAttribute('aria-pressed',String(b.dataset.type===state.type));});
  const list=visibleProducts();$('#resultCount').textContent='共 '+list.length+' 个商品';
  $('#stockList').innerHTML=list.length?list.slice(0,state.limit).map(p=>{
- const r=productRows(p),warehouseQty=r.warehouses.reduce((a,b)=>a+b.warehouse,0),storeQty=r.stores.reduce((a,b)=>a+b.quantity,0),supplierQty=r.warehouses.reduce((a,b)=>a+b.supplier,0),managers=managerNames(p);
- const groupCount=unique((state.mode==='stores'?r.stores:state.mode==='warehouses'?r.warehouses:[...r.warehouses,...r.stores]).map(row=>row.w)).length;
- const manager=groupCount>1?'<button class="manager-link" data-manager-detail="'+p.id+'">查看分仓明细</button>':(managers.length?esc(UMAP[managers[0]].name):'未归属');
- return '<article class="stock-card" data-product-card="'+p.id+'"><div class="stock-heading"><span class="type-badge '+(p.type==='nonstandard'?'nonstandard':'')+'">'+(p.type==='standard'?'标品':'非标品')+'</span><h2>'+esc(p.name)+'</h2></div><div class="kv"><span class="label">规格：</span><span class="value">'+esc(p.spec)+'</span></div><div class="kv"><span class="label">产品经理：</span><span class="value">'+manager+'</span></div><div class="kv"><span class="label">SKU编号：</span><span class="value sku">'+p.sku+'</span></div><div class="stock-values">'+(state.mode!=='warehouses'?'<div class="kv"><span class="label">门店库存：</span><span class="amount">'+amount(storeQty,p.unit)+'</span></div>':'')+'<div class="kv"><span class="label">分仓库存：</span><span class="amount">'+amount(warehouseQty,p.unit)+'</span></div><div class="kv"><span class="label">供应商实际库存：</span><span class="amount">'+amount(supplierQty,p.unit)+'</span></div></div></article>';
+ const metrics=inventoryMetrics(p),managers=managerNames(p),names=managers.map(id=>UMAP[id].name),preview=names.slice(0,3).join('、')+(names.length>3?'...':'');
+ const manager='<span class="manager-names" title="'+esc(names.join('、'))+'">'+esc(preview||'未归属')+'</span>'+(names.length?'<button class="manager-link" data-manager-detail="'+p.id+'" aria-label="查看'+esc(p.name)+'的产品经理明细">查看<span aria-hidden="true">&gt;</span></button>':'');
+ return '<article class="stock-card" data-product-card="'+p.id+'"><div class="stock-heading"><span class="label">商品名称：</span><div class="stock-title"><h2>'+esc(p.name)+'</h2><span class="type-badge '+(p.type==='nonstandard'?'nonstandard':'')+'">'+(p.type==='standard'?'标品':'非标品')+'</span></div></div><div class="kv"><span class="label">规格：</span><span class="value">'+esc(p.spec)+'</span></div><div class="kv"><span class="label">产品经理：</span><span class="value manager-value">'+manager+'</span></div><div class="kv"><span class="label">sku编号：</span><span class="value sku">'+esc(p.sku)+'</span></div><div class="stock-values"><div class="kv"><span class="label">总实物库存：</span><span class="amount" data-metric="totalPhysical">'+amount(metrics.totalPhysical,p.unit)+'</span></div><div class="kv"><span class="label">待取货数量：</span><span class="amount" data-metric="pendingPickup">'+amount(metrics.pendingPickup,p.unit)+'</span></div><div class="kv"><span class="label">分仓留存：</span><span class="amount" data-metric="retained">'+amount(metrics.retained,p.unit)+'</span></div><div class="kv"><span class="label">供应商库区库存：</span><span class="amount" data-metric="supplierZone">'+amount(metrics.supplierZone,p.unit)+'</span></div></div></article>';
  }).join(''):'<div class="empty">'+icon('shopping-bag')+'当前筛选条件下暂无商品<br>试试调整商品、产品经理或关联组织</div>';
  $('#listEnd').innerHTML=list.length>state.limit?'<button class="load-more" id="loadMore">加载更多（剩余 '+(list.length-state.limit)+' 个）</button>':list.length?'<div class="list-end">已显示全部商品</div>':'';
  if($('#loadMore'))$('#loadMore').onclick=()=>{state.limit+=10;render();};
@@ -150,8 +155,9 @@ function drawOrg(){
 }
 function drawManagerDetail(){
  const p=PMAP[detailProduct],rows=productRows(p),wids=unique([...rows.warehouses.map(r=>r.w),...rows.stores.map(r=>r.w)]);
- $('#sheetBody').innerHTML='<div class="detail-product">'+esc(p.name)+'</div>'+wids.map(w=>{const warehouse=rows.warehouses.find(r=>r.w===w),stores=rows.stores.filter(r=>r.w===w),manager=UMAP[(warehouse||stores[0]).u],qty=state.mode==='stores'?stores.reduce((a,r)=>a+r.quantity,0):state.mode==='warehouses'?(warehouse?.warehouse||0):(warehouse?.warehouse||0)+stores.reduce((a,r)=>a+r.quantity,0);return '<div class="manager-detail"><span class="avatar">'+manager.name[0]+'</span><span class="info"><span class="name">'+manager.name+'</span><span class="sub" style="display:block">'+esc(WMAP[w].name)+'</span></span><span class="quantity">'+amount(qty,p.unit)+'</span></div>';}).join('')+'<p class="detail-note">'+(state.mode==='stores'?'展示当前所选门店库存，按所属分仓及产品经理汇总。':state.mode==='warehouses'?'展示当前所选分仓库存，按产品经理归属分别统计。':'展示当前所选仓库与门店库存，按分仓及产品经理分别汇总。')+'</p>';
+ $('#sheetBody').innerHTML='<div class="detail-product">'+esc(p.name)+'</div>'+wids.map(w=>{const warehouse=rows.warehouses.find(r=>r.w===w),stores=rows.stores.filter(r=>r.w===w),manager=UMAP[(warehouse||stores[0]).u];return '<div class="manager-detail"><span class="avatar">'+manager.name[0]+'</span><span class="info"><span class="name">'+manager.name+'</span><span class="sub" style="display:block">'+esc(WMAP[w].name)+'</span></span></div>';}).join('')+'<p class="detail-note">展示当前筛选范围内各分仓对应的产品经理。</p>';
 }
+
 $('#productFilter').onclick=()=>openSheet('product');$('#managerFilter').onclick=()=>openSheet('manager');$('#orgFilter').onclick=()=>openSheet('org');$('#sheetClose').onclick=closeSheet;$('#mask').onclick=closeSheet;
 $('#sheetReset').onclick=()=>{draft.keyword='';if(modalKind==='product'){draft.products=[];draft.categories=[];}else if(modalKind==='manager')draft.managers=[];else{draft.stores=[];draft.warehouses=[];}drawSheet();};
 $('#sheetConfirm').onclick=()=>{
@@ -165,7 +171,7 @@ $('#sheetConfirm').onclick=()=>{
 };
 $('#clearFilters').onclick=()=>{Object.assign(state,{productMode:'product',products:[],categories:[],managers:[],mode:permission.initial,stores:[...permission.stores],warehouses:[...permission.warehouses],type:'all',limit:10});render();};
 $('#typeTabs').querySelectorAll('[data-type]').forEach(b=>b.onclick=()=>{state.type=b.dataset.type;state.limit=10;render();});
-$('#backToReports').onclick=()=>location.assign('reports.html?v=20261026-inventory');
+$('#backToReports').onclick=()=>location.assign('reports.html?v=20261026-inventory-fields');
 document.addEventListener('keydown',e=>{
  if(!$('#drawer').classList.contains('show'))return;
  if(e.key==='Escape'){e.preventDefault();closeSheet();return;}
@@ -181,5 +187,5 @@ document.addEventListener('click',event=>{
  setTimeout(()=>{const next=id?document.getElementById(id):document.querySelector('button['+attribute+'="'+CSS.escape(button.dataset[key])+'"]');if(next&&next!==button)next.focus({preventScroll:true});},0);
 },true);
 // Demo-only inspection surface; production authorization must be enforced by the API.
-window.InventoryDemo={account:accountKey,state,permission,visibleProducts,productRows,locations};
+window.InventoryDemo={account:accountKey,state,permission,visibleProducts,productRows,locations,inventoryMetrics};
 render();
