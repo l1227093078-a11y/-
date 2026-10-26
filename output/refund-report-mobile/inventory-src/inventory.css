@@ -4,7 +4,7 @@
 
 /* Consistent fields and an always-visible manager detail action. */
 .stock-heading>.label{font-size:12px;color:#8b9a90;flex:none;line-height:1.7;padding-top:1px;white-space:nowrap}
-.stock-title{min-width:0;flex:1}.stock-title h2{font-size:14px}.stock-title .type-badge{display:inline-block;margin-top:4px}
+.stock-title{min-width:0;flex:1}.stock-title h2{font-size:14px}.stock-title .type-badge{display:inline-block;margin:0 6px 0 0;vertical-align:1px;font-weight:400}
 .manager-value{display:flex;align-items:center;justify-content:flex-end;gap:6px;min-width:0;flex:1}
 .manager-names{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:0 1 auto;font-size:12px}
 .manager-link{display:inline-flex;align-items:center;gap:3px;white-space:nowrap;flex:none;text-decoration:none;font-size:12px}

@@ -4,8 +4,8 @@
 
 ## 打开与交付
 
-- [经营报表入口](https://l1227093078-a11y.github.io/-/?v=20261026-inventory-fields)：原门店/仓库库存入口合并为“库存统计”，已有退款统计保留。
-- [直接打开库存统计](https://l1227093078-a11y.github.io/-/inventory.html?v=20261026-inventory-fields)。
+- [经营报表入口](https://l1227093078-a11y.github.io/-/?v=20261026-inventory-tag)：原门店/仓库库存入口合并为“库存统计”，已有退款统计保留。
+- [直接打开库存统计](https://l1227093078-a11y.github.io/-/inventory.html?v=20261026-inventory-tag)。
 - [下载完整 H5 代码包](../inventory-h5.zip)。解压后用浏览器打开 `index.html`；也可在本目录运行 `python -m http.server 4182` 后访问 `http://localhost:4182/`。
 
 库存页面是 `inventory.html`；经营报表为 `index.html` / `reports.html`；退款页为 `refund.html`。跳转时请保留文件的相对目录。
@@ -32,10 +32,10 @@
 
 | 账号 | 演示链接 | 可见范围 / 组织标签 |
 | --- | --- | --- |
-| 门店 | [account=store](https://l1227093078-a11y.github.io/-/inventory.html?account=store&v=20261026-inventory-fields) | 上海南京西路店；仅“门店” |
-| 区域 | [account=region](https://l1227093078-a11y.github.io/-/inventory.html?account=region&v=20261026-inventory-fields) | 华东市场授权的 4 家门店；仅“门店” |
-| 分仓 | [account=warehouse](https://l1227093078-a11y.github.io/-/inventory.html?account=warehouse&v=20261026-inventory-fields) | 青岛分仓及其 2 家门店；“门店、仓库、仓库+门店” |
-| 总仓 | [account=hq](https://l1227093078-a11y.github.io/-/inventory.html?account=hq&v=20261026-inventory-fields) | 全部演示分仓及门店；三个标签 |
+| 门店 | [account=store](https://l1227093078-a11y.github.io/-/inventory.html?account=store&v=20261026-inventory-tag) | 上海南京西路店；仅“门店” |
+| 区域 | [account=region](https://l1227093078-a11y.github.io/-/inventory.html?account=region&v=20261026-inventory-tag) | 华东市场授权的 4 家门店；仅“门店” |
+| 分仓 | [account=warehouse](https://l1227093078-a11y.github.io/-/inventory.html?account=warehouse&v=20261026-inventory-tag) | 青岛分仓及其 2 家门店；“门店、仓库、仓库+门店” |
+| 总仓 | [account=hq](https://l1227093078-a11y.github.io/-/inventory.html?account=hq&v=20261026-inventory-tag) | 全部演示分仓及门店；三个标签 |
 
 未知账号参数进入无授权状态，不回退为总仓。候选项、搜索、全选、汇总及经理明细均按演示账号范围计算。门店范围的分仓/供应商信息仅使用所选门店关联的授权分仓。
 

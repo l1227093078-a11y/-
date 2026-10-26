@@ -20,4 +20,4 @@
 
 ## 库存统计 H5
 
-[在线体验](https://l1227093078-a11y.github.io/-/inventory.html?v=20261026-inventory-fields) · [使用说明及权限演示](inventory-README.md) · [下载完整 H5 代码包](../inventory-h5.zip)。支持商品/分类、产品经理、关联组织筛选与产品经理分仓明细。
+[在线体验](https://l1227093078-a11y.github.io/-/inventory.html?v=20261026-inventory-tag) · [使用说明及权限演示](inventory-README.md) · [下载完整 H5 代码包](../inventory-h5.zip)。支持商品/分类、产品经理、关联组织筛选与产品经理分仓明细。
