@@ -1,0 +1,44 @@
+{
+  "result": "passed",
+  "cases": [
+    {
+      "width": 320,
+      "checks": "product/category/manager/organization/detail/search/reset/cancel/empty",
+      "result": "passed"
+    },
+    {
+      "width": 375,
+      "checks": "product/category/manager/organization/detail/search/reset/cancel/empty",
+      "result": "passed"
+    },
+    {
+      "width": 485,
+      "checks": "product/category/manager/organization/detail/search/reset/cancel/empty",
+      "result": "passed"
+    },
+    {
+      "account": "store",
+      "checks": "candidate tabs, candidates, scoped aggregation",
+      "result": "passed"
+    },
+    {
+      "account": "region",
+      "checks": "candidate tabs, candidates, scoped aggregation",
+      "result": "passed"
+    },
+    {
+      "account": "warehouse",
+      "checks": "candidate tabs, candidates, scoped aggregation",
+      "result": "passed"
+    },
+    {
+      "account": "hq",
+      "checks": "candidate tabs, candidates, scoped aggregation",
+      "result": "passed"
+    },
+    {
+      "checks": "root/menu/inventory/back/refund routing",
+      "result": "passed"
+    }
+  ]
+}
