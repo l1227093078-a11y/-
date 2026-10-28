@@ -1,0 +1,10 @@
+{
+  "name": "mall-recommendation-h5",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "build": "python3 src/build.py",
+    "dev": "node src/dev.cjs",
+    "test": "node src/verify.cjs"
+  }
+}

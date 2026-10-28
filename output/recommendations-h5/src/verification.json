@@ -1,0 +1,30 @@
+{
+  "result": "passed",
+  "cases": [
+    {
+      "viewport": "320×844",
+      "result": "passed",
+      "checks": "search/status/nested filters/batch remove/cancel/persistence/required fields/restore/add dedup/two-level picker/draft and store sorting/history/keyboard"
+    },
+    {
+      "viewport": "375×844",
+      "result": "passed",
+      "checks": "search/status/nested filters/batch remove/cancel/persistence/required fields/restore/add dedup/two-level picker/draft and store sorting/history/keyboard"
+    },
+    {
+      "viewport": "485×844",
+      "result": "passed",
+      "checks": "search/status/nested filters/batch remove/cancel/persistence/required fields/restore/add dedup/two-level picker/draft and store sorting/history/keyboard"
+    },
+    {
+      "accounts": "admin/region/store/unknown",
+      "result": "passed",
+      "checks": "authorized records/candidate stores/all-select counts/storage isolation/unknown fail closed"
+    }
+  ],
+  "shortScreens": "320×600 / 320×667 passed",
+  "supplemental": [
+    "批量全选/取消及筛选标签删除 passed",
+    "中文输入法组合期间不重绘，完成后搜索及普通编号搜索 passed"
+  ]
+}
