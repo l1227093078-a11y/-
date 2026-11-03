@@ -255,6 +255,7 @@ button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:default}b
 .stage{flex-wrap:wrap;row-gap:16px}.requirements-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex:0 0 100%;max-width:1062px;min-height:48px;padding:8px 16px;border:1px solid #dce6df;border-radius:12px;background:#fff;color:#647b6a;font-size:13px}.requirements-toolbar a{display:block;min-height:32px;padding:5px 12px;border-radius:8px;background:#eaf6ef;color:#00874d;text-decoration:none;font-weight:600}.requirements-header{position:relative}.requirements-back{display:none;font-size:12px;color:#00874d;text-decoration:none}.requirements-toolbar a:focus-visible,.requirements-back:focus-visible{outline:2px solid #00874d;outline-offset:3px}
 @media(max-width:900px){.requirements-toolbar{display:flex;flex:none;align-items:center;justify-content:space-between;gap:16px;width:min(100%,620px);min-height:48px;padding:8px 16px;border:1px solid #dce6df;border-radius:12px;background:#fff;color:#647b6a;font-size:13px}.requirements-toolbar a{display:block;min-height:32px;padding:5px 12px;border-radius:8px;background:#eaf6ef;color:#00874d;text-decoration:none;font-weight:600}.requirements-back{display:block;position:absolute;right:24px;top:27px}}
 @media(max-width:460px){.stage{gap:12px}.requirements-toolbar{min-height:52px;border:0;border-bottom:1px solid #e0e9e2;border-radius:0}.phone{height:calc(100dvh - 64px)}.requirements-panel{margin-top:12px}.requirements-back{right:20px;top:23px}}
+.requirements-list{margin:0;padding-left:21px}.requirements-list>li::marker{color:#00874d;font-weight:600}.requirements-header h2,.requirements-section h3,.requirements-section strong{font-weight:700}
 </style>
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iaWNvbiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGFyaWEtaGlkZGVuPSJ0cnVlIj4gPHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+IDxwYXRoIGQ9Ik01IDIxdi0xNmEyIDIgMCAwIDEgMiAtMmgxMGEyIDIgMCAwIDEgMiAydjE2bC0zIC0ybC0yIDJsLTIgLTJsLTIgMmwtMiAtMmwtMyAybTQgLTE0aDZtLTYgNGg2bS0yIDRoMiIgLz4gPC9zdmc+">
 </head>
@@ -320,41 +321,47 @@ button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:default}b
   <aside class="requirements-panel" aria-labelledby="requirementsTitle">
     <header class="requirements-header"><a class="requirements-back" href="#mobilePreview">返回原型</a><span class="requirements-kicker">需求文档</span><h2 id="requirementsTitle">退款金额统计</h2></header>
     <div class="requirements-content" tabindex="0" aria-label="退款金额统计需求文档，可滚动阅读">
-      <section class="requirements-section"><h3><span>01</span>统计时间</h3><ul>
-        <li>默认今日，支持自定义选择范围。</li>
-        <li>按退款成功时间归属统计周期，而非下单时间或申请时间。</li>
-        <li>仅计算实际退款成功金额，处理中、失败、关闭不计入。</li>
-      </ul></section>
-      <section class="requirements-section"><h3><span>02</span>筛选条件</h3><ul>
-        <li>除时间以外，其它筛选条件，非必填，默认请选择。</li>
-        <li><strong>商品：</strong>选择总仓维度商品。</li>
-        <li><strong>商品分类：</strong>两级结构。勾选一级分类即选中其下全部二级分类；也可展开单独勾选二级分类。</li>
-        <li><strong>产品经理：</strong>一个产品经理可绑定多个商品；绑定关系变更时按退款发生时的归属计算。<em>产品经理不做权限隔离。</em></li>
-        <li><strong>市场/门店：</strong>权限隔离，仅可查看账号关联组织下的门店退款数据，不能看到该市场其他门店数据。<em>同现在门店库存统计界面的筛选逻辑一致。</em></li>
+      <section class="requirements-section"><h3><span>01</span>统计时间</h3><ol class="requirements-list">
+        <li><strong>默认今日</strong>，支持自定义选择范围。</li>
+        <li>按<strong>退款成功时间</strong>归属统计周期，而非下单时间或申请时间。</li>
+        <li>仅计算<strong>实际退款成功金额</strong>，<strong>退款中、失败、关闭不计入</strong>。</li>
+      </ol></section>
+      <section class="requirements-section"><h3><span>02</span>筛选条件</h3><ol class="requirements-list">
+        <li>除时间以外，其它筛选条件，<strong>非必填，默认请选择</strong>。</li>
+        <li><strong>商品：</strong>选择<strong>总仓维度商品</strong>。</li>
+        <li><strong>商品分类：</strong>两级结构。<strong>勾选一级分类即选中其下全部二级分类</strong>；也可展开单独勾选二级分类。</li>
+        <li>商品初始归属 A 分类，后续调整至 B 分类时，该商品对应的订单统计数据，<strong>在 A、B 两个分类下均可查到</strong>。</li>
+        <li><strong>市场/门店：权限隔离</strong>，仅可查看<strong>账号关联组织下的门店退款数据</strong>，不能看到该市场其他门店数据。同现在门店库存统计界面的筛选逻辑一致。</li>
         <li><strong>重置筛选：</strong>清除商品/分类、市场/门店、产品经理已选择的数据。</li>
-      </ul></section>
-      <section class="requirements-section"><h3><span>03</span>退款金额合计</h3>
-        <ol class="requirements-reasons">
-          <li><strong>超时自动退单金额</strong><p>订单超时未取货，由系统自动退单所产生的退款金额。</p></li>
-          <li><strong>未取货申请仅退款金额</strong><p>用户未取货之前，主动发起退款申请、或者后台主动仅退款、店长在手机端手动批量退款并退款成功的金额。</p></li>
-          <li><strong>已取货退货退款金额</strong><p>商品已完成核销后，由门店主动发起退货退款的金额。</p></li>
-        </ol><ul>
-          <li>金额合计为以上三类相加之和，且这三类互斥不重叠。</li>
-          <li><strong>金额占比：</strong>该原因金额 ÷ 当前范围退款总额 × 100%，显示 2 位小数。</li>
-        </ul>
-      </section>
-      <section class="requirements-section"><h3><span>04</span>退款趋势</h3><ul>
-        <li>日期多时支持触摸左右滑动。</li>
-        <li>点击日期附近图表，显示日期、当日合计及三类金额。</li>
-        <li>切换柱状/折线保留浏览位置和选中日期；时间范围改变后重置。</li>
-      </ul></section>
-      <section class="requirements-section"><h3><span>05</span>多维度明细</h3><ul>
-        <li>继承首页已确认的筛选条件；返回后保留首页条件。</li>
+      </ol></section>
+      <section class="requirements-section"><h3><span>03</span>产品经理</h3><ol class="requirements-list">
+        <li><strong>产品经理：</strong>一个产品经理可绑定多个商品；退款金额<strong>按下单时绑定的产品经理归属统计</strong>。</li>
+        <li><strong>产品经理选择下拉：</strong>仅展示<strong>当前启用状态</strong>的产品经理，<strong>已离职、已删除的产品经理不在选择列表</strong>。</li>
+        <li>筛选历史数据时，<strong>仍可查询到对应历史产品经理的统计记录</strong>。</li>
+        <li>历史订单需<strong>后端手动调整</strong>，统一关联至职位规范调整后的产品经理。</li>
+        <li><strong>产品经理不做权限隔离</strong>。</li>
+      </ol></section>
+      <section class="requirements-section"><h3><span>04</span>退款金额合计</h3><ol class="requirements-list">
+        <li><strong>超时自动退单金额：</strong>订单超时未取货，由系统自动退单所产生的退款金额。</li>
+        <li><strong>未取货申请仅退款金额：</strong>用户未取货之前，主动发起退款申请、或者后台主动仅退款、店长在手机端手动批量退款并退款成功的金额。</li>
+        <li><strong>已取货退货退款金额：</strong>商品已完成核销后，由门店主动发起退货退款的金额。</li>
+        <li>金额合计为以上三类相加之和，且<strong>这三类互斥不重叠</strong>。</li>
+        <li><strong>金额占比：</strong>该原因金额 ÷ 当前范围退款总额 × 100%，<strong>显示 2 位小数</strong>。</li>
+        <li><strong>线下退款归入现有三类统计口径</strong>，不单独拆分核算。</li>
+        <li>老系统迁移至新系统的订单退款数据，<strong>无需额外处理</strong>。</li>
+      </ol></section>
+      <section class="requirements-section"><h3><span>05</span>退款趋势</h3><ol class="requirements-list">
+        <li>日期多时支持<strong>触摸左右滑动</strong>。</li>
+        <li>点击日期附近图表，显示<strong>日期、当日合计及三类金额</strong>。</li>
+        <li>切换柱状/折线<strong>保留浏览位置和选中日期</strong>；<strong>时间范围改变后重置</strong>。</li>
+      </ol></section>
+      <section class="requirements-section"><h3><span>06</span>多维度明细</h3><ol class="requirements-list">
+        <li><strong>继承首页已确认的筛选条件</strong>；返回后保留首页条件。</li>
         <li><strong>按商品统计：</strong>按商品。</li>
         <li><strong>按商品分类统计：</strong>按一级分类分卡，显示有数据的二级分类数；各一级可独立展开/收起。</li>
         <li><strong>按产品经理统计：</strong>按退款发生时经理归属；显示权限内关联商品数。</li>
-        <li><strong>按市场/门店统计：</strong>按市场分卡，显示当前条件下的可见门店数，可进入该市场，查看门店维度数据；<em>门店权限仅展示自己的门店数据。</em></li>
-      </ul></section>
+        <li><strong>按市场/门店统计：</strong>按市场分卡，显示当前条件下的可见门店数，可进入该市场，查看门店维度数据；<strong>门店权限仅展示自己的门店数据</strong>。</li>
+      </ol></section>
     </div>
   </aside>
 </div>
