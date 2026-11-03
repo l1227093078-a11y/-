@@ -2,7 +2,7 @@
 
 独立版本，原经营报表预览保持不变。打开 `index.html` 自动进入 `reports.html`，点击“退货金额统计”进入退款统计，再点击“市场/门店”查看新选择器。
 
-可在本目录运行 `python3 -m http.server 4186`，通过 HTTP 预览。四个 HTML 均为独立页面，资源内嵌，不需要构建或 CDN。
+可在本目录运行 `python3 -m http.server 4186`，通过 HTTP 预览。HTML 均为独立页面，资源内嵌，不需要构建或 CDN。
 
 ## 市场/门店选择
 
@@ -17,3 +17,5 @@
 当前是前端演示数据。生产环境的组织可见范围和退款数据隔离应由登录账户的后端权限限定，不能依赖前端复选框作为权限控制。
 
 `verify.cjs` 使用 Playwright + Chromium，可通过 `H5_BASE_URL` 和 `CHROME_PATH` 指定地址与浏览器路径。截图见 `previews/`。
+
+经营报表的退款入口使用独立内页 `refund-market-selector.html`，避免复用旧退款内页的浏览器缓存。该文件与 `refund.html` 保持一致，原报表固定地址不变。
