@@ -230,32 +230,28 @@ button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:default}b
 @media(max-width:360px){.org-root{padding:13px 15px}.org-root small{margin-left:6px;font-size:11px}.org-market-row{padding-left:11px;gap:7px}.org-market-row>button{font-size:14px}.org-store-row{padding:13px 11px;font-size:13px;gap:7px}.org-store-heading{padding:11px;font-size:11px}.org-store-heading small{font-size:10px}.drawer[data-mode=market] .dft{padding-left:18px;padding-right:18px}}
 .org-root input,.org-market-row>input,.org-store-row input{appearance:none;-webkit-appearance:none;border:1.5px solid #cdd7d0;border-radius:4px;background:#fff;display:grid;place-items:center}.org-root input:checked,.org-market-row>input:checked,.org-store-row input:checked{background-color:#00b775;border-color:#00b775;background-image:url("data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iaWNvbiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+IDxwYXRoIHN0cm9rZT0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPiA8cGF0aCBkPSJNNSAxMmw1IDVsMTAgLTEwIiAvPiA8L3N2Zz4=");background-position:center;background-size:17px;background-repeat:no-repeat}.org-root input:indeterminate,.org-market-row>input:indeterminate{appearance:auto;-webkit-appearance:checkbox;accent-color:#00874d}
 
-/* Requirements live outside the mobile prototype, as a separate review panel. */
-.stage{gap:28px}
-.requirements-panel{flex:0 1 620px;min-width:0;height:894px;background:#fff;border:1px solid #dce6df;border-radius:24px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 12px 40px #28483106}
-.requirements-header{flex:none;padding:27px 30px 22px;border-bottom:1px solid #e9efeb;background:#fcfdfc}
+/* Requirements remain to the right of the phone at every viewport width. */
+body{background:#edf3ee}
+.stage{display:grid;grid-template-columns:414px 620px;grid-template-rows:auto 894px;gap:16px 28px;align-items:start;align-content:start;justify-content:center;width:max-content;min-width:100%;min-height:100svh;padding:36px 20px 24px}
+.phone{grid-column:1;grid-row:2;width:414px;height:894px;min-height:0;border:7px solid #fff;border-radius:39px;box-shadow:0 0 0 1px #d8e3dc,0 22px 55px #28483112}
+.requirements-toolbar{grid-column:1/-1;grid-row:1;display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;min-height:48px;padding:8px 16px;border:1px solid #dce6df;border-radius:12px;background:#fff;color:#647b6a;font-size:13px}
+.requirements-toolbar a{display:block;min-height:32px;padding:5px 12px;border-radius:8px;background:#eaf6ef;color:#00874d;text-decoration:none;font-weight:600}
+.requirements-panel{grid-column:2;grid-row:2;width:620px;height:894px;min-width:0;background:#fff;border:1px solid #dce6df;border-radius:24px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 12px 40px #28483106}
+.requirements-header{position:relative;flex:none;padding:27px 30px 22px;border-bottom:1px solid #e9efeb;background:#fcfdfc}
 .requirements-kicker{font-size:12px;letter-spacing:2px;color:#6e8575;font-weight:600}
-.requirements-header h2{font-size:23px;font-weight:650;line-height:1.5;letter-spacing:.3px;margin:5px 0 0;color:#20382c}
+.requirements-header h2{width:fit-content;max-width:100%;scroll-margin-left:20px;font-size:23px;font-weight:700;line-height:1.5;letter-spacing:.3px;margin:5px 0 0;color:#20382c}
 .requirements-content{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:25px 30px 32px;scrollbar-width:thin;scrollbar-color:#d1ded4 transparent}
 .requirements-content:focus-visible{outline:2px solid #00874d;outline-offset:-3px}
+.requirements-back{position:absolute;right:24px;top:27px;font-size:12px;color:#00874d;text-decoration:none}
+.requirements-toolbar a:focus-visible,.requirements-back:focus-visible{outline:2px solid #00874d;outline-offset:3px}
 .requirements-section+.requirements-section{margin-top:26px;padding-top:25px;border-top:1px solid #e9efeb}
-.requirements-section h3{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:650;margin:0 0 14px;line-height:1.6;color:#243c2d}
+.requirements-section h3{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:700;margin:0 0 14px;line-height:1.6;color:#243c2d}
 .requirements-section h3>span{font-size:12px;line-height:26px;padding:0 7px;border-radius:7px;color:#00874d;background:#edf7f0;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:.3px}
-.requirements-section ul{margin:0;padding-left:19px}
-.requirements-section li{font-size:14px;line-height:1.95;color:#51665a;padding-left:3px;overflow-wrap:anywhere}
-.requirements-section li+li{margin-top:9px}
-.requirements-section li::marker{color:#89aa94}
-.requirements-section strong{font-weight:600;color:#314f3b}
-.requirements-section em{display:block;font-style:normal;color:#436a51}
-.requirements-reasons{padding-left:21px;margin:0 0 16px}
-.requirements-reasons>li::marker{color:#00874d;font-weight:600}
-.requirements-reasons p{margin:3px 0 0}
-@media(max-width:900px) and (min-width:461px){.stage{flex-direction:column;align-items:center;gap:28px}.requirements-panel{flex:none;width:min(100%,620px);height:auto;max-height:894px;min-height:500px}}
-@media(max-width:460px){.stage{flex-direction:column;align-items:stretch;gap:24px}.requirements-panel{flex:none;margin:0 12px 24px;width:calc(100% - 24px);height:auto;border-radius:18px}.requirements-header{padding:22px 20px 18px}.requirements-header h2{font-size:21px}.requirements-content{overflow:visible;padding:22px 20px 28px;flex:none}.requirements-section li{font-size:14px}}
-.stage{flex-wrap:wrap;row-gap:16px}.requirements-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex:0 0 100%;max-width:1062px;min-height:48px;padding:8px 16px;border:1px solid #dce6df;border-radius:12px;background:#fff;color:#647b6a;font-size:13px}.requirements-toolbar a{display:block;min-height:32px;padding:5px 12px;border-radius:8px;background:#eaf6ef;color:#00874d;text-decoration:none;font-weight:600}.requirements-header{position:relative}.requirements-back{display:none;font-size:12px;color:#00874d;text-decoration:none}.requirements-toolbar a:focus-visible,.requirements-back:focus-visible{outline:2px solid #00874d;outline-offset:3px}
-@media(max-width:900px){.requirements-toolbar{display:flex;flex:none;align-items:center;justify-content:space-between;gap:16px;width:min(100%,620px);min-height:48px;padding:8px 16px;border:1px solid #dce6df;border-radius:12px;background:#fff;color:#647b6a;font-size:13px}.requirements-toolbar a{display:block;min-height:32px;padding:5px 12px;border-radius:8px;background:#eaf6ef;color:#00874d;text-decoration:none;font-weight:600}.requirements-back{display:block;position:absolute;right:24px;top:27px}}
-@media(max-width:460px){.stage{gap:12px}.requirements-toolbar{min-height:52px;border:0;border-bottom:1px solid #e0e9e2;border-radius:0}.phone{height:calc(100dvh - 64px)}.requirements-panel{margin-top:12px}.requirements-back{right:20px;top:23px}}
-.requirements-list{margin:0;padding-left:21px}.requirements-list>li::marker{color:#00874d;font-weight:600}.requirements-header h2,.requirements-section h3,.requirements-section strong{font-weight:700}
+.requirements-list{margin:0;padding-left:21px}
+.requirements-list>li{font-size:14px;line-height:1.95;color:#51665a;padding-left:3px;overflow-wrap:anywhere}
+.requirements-list>li+li{margin-top:9px}
+.requirements-list>li::marker{color:#00874d;font-weight:600}
+.requirements-section strong{font-weight:700;color:#314f3b}
 </style>
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iaWNvbiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGFyaWEtaGlkZGVuPSJ0cnVlIj4gPHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+IDxwYXRoIGQ9Ik01IDIxdi0xNmEyIDIgMCAwIDEgMiAtMmgxMGEyIDIgMCAwIDEgMiAydjE2bC0zIC0ybC0yIDJsLTIgLTJsLTIgMmwtMiAtMmwtMyAybTQgLTE0aDZtLTYgNGg2bS0yIDRoMiIgLz4gPC9zdmc+">
 </head>
@@ -328,10 +324,10 @@ button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:default}b
       </ol></section>
       <section class="requirements-section"><h3><span>02</span>筛选条件</h3><ol class="requirements-list">
         <li>除时间以外，其它筛选条件，<strong>非必填，默认请选择</strong>。</li>
-        <li><strong>商品：</strong>选择<strong>总仓维度商品</strong>。</li>
+        <li><strong>商品：</strong>选择<strong>总仓维度商品（常规、组合）</strong>、<strong>不展示套装品，仅展示套装关联的子商品</strong>。</li>
         <li><strong>商品分类：</strong>两级结构。<strong>勾选一级分类即选中其下全部二级分类</strong>；也可展开单独勾选二级分类。</li>
         <li>商品初始归属 A 分类，后续调整至 B 分类时，该商品对应的订单统计数据，<strong>在 A、B 两个分类下均可查到</strong>。</li>
-        <li><strong>市场/门店：权限隔离</strong>，仅可查看<strong>账号关联组织下的门店退款数据</strong>，不能看到该市场其他门店数据。同现在门店库存统计界面的筛选逻辑一致。</li>
+        <li><strong>市场/门店：权限隔离</strong>，仅可查看<strong>所属组织下门店退款数据</strong>，看不到同市场其他门店，复用门店库存统计筛选逻辑。</li>
         <li><strong>重置筛选：</strong>清除商品/分类、市场/门店、产品经理已选择的数据。</li>
       </ol></section>
       <section class="requirements-section"><h3><span>03</span>产品经理</h3><ol class="requirements-list">
@@ -343,11 +339,11 @@ button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:default}b
       </ol></section>
       <section class="requirements-section"><h3><span>04</span>退款金额合计</h3><ol class="requirements-list">
         <li><strong>超时自动退单金额：</strong>订单超时未取货，由系统自动退单所产生的退款金额。</li>
-        <li><strong>未取货申请仅退款金额：</strong>用户未取货之前，主动发起退款申请、或者后台主动仅退款、店长在手机端手动批量退款并退款成功的金额。</li>
+        <li><strong>未取货仅退款金额：</strong>用户未取货之前，由<strong>用户或店员主动发起退款并退款成功</strong>的金额。</li>
         <li><strong>已取货退货退款金额：</strong>商品已完成核销后，由门店主动发起退货退款的金额。</li>
+        <li><strong>异步退款（线下退款）：</strong>仅仅是<strong>标签标记</strong>，并非真正计入线下退款统计，<strong>归属至上述三类</strong>。</li>
         <li>金额合计为以上三类相加之和，且<strong>这三类互斥不重叠</strong>。</li>
         <li><strong>金额占比：</strong>该原因金额 ÷ 当前范围退款总额 × 100%，<strong>显示 2 位小数</strong>。</li>
-        <li><strong>线下退款归入现有三类统计口径</strong>，不单独拆分核算。</li>
         <li>老系统迁移至新系统的订单退款数据，<strong>无需额外处理</strong>。</li>
       </ol></section>
       <section class="requirements-section"><h3><span>05</span>退款趋势</h3><ol class="requirements-list">
@@ -360,7 +356,7 @@ button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:default}b
         <li><strong>按商品统计：</strong>按商品。</li>
         <li><strong>按商品分类统计：</strong>按一级分类分卡，显示有数据的二级分类数；各一级可独立展开/收起。</li>
         <li><strong>按产品经理统计：</strong>按退款发生时经理归属；显示权限内关联商品数。</li>
-        <li><strong>按市场/门店统计：</strong>按市场分卡，显示当前条件下的可见门店数，可进入该市场，查看门店维度数据；<strong>门店权限仅展示自己的门店数据</strong>。</li>
+        <li><strong>按市场/门店统计：</strong>卡片内展示符合条件的门店数量，可进入市场查看门店明细，<strong>门店账号仅能看到自身数据</strong>。</li>
       </ol></section>
     </div>
   </aside>
