@@ -305,9 +305,9 @@ body{background:#edf3ee}
       <h4 id="helpTitle">规则说明</h4>
 <div class="it"><b>统计时间</b>按退款成功时间归属统计周期，而非下单时间或申请时间。</div>
 <div class="it"><b>退款金额合计</b>筛选时间段内实际退还用户的金额合计 = 以下三项之和，三项互斥不重叠。</div>
-<div class="it"><b>① 超时自动退单金额</b>订单超时未取货，由系统自动退单所产生的退款金额。</div>
-<div class="it"><b>② 未取货仅退款金额</b>用户未取货之前，由用户或店员主动发起退款并退款成功的金额。</div>
-<div class="it"><b>③ 已取货退货退款金额</b>商品已完成核销后，由门店主动发起退货退款的金额。</div>
+<div class="it"><b>① 超时自动退单金额</b>订单超时未取货，由系统自动退单所产生的金额。</div>
+<div class="it"><b>② 未取货仅退款金额</b>用户未取货之前，由用户或店员发起退款所产生的金额。</div>
+<div class="it"><b>③ 已取货退货退款金额</b>商品已完成核销后，由门店发起退货退款所产生的金额。</div>
 <div class="it"><b>商品分类</b>两级结构。勾选一级分类即选中其下全部二级分类；也可展开单独勾选二级分类。</div>
 <div class="it"><b>产品经理</b>一个产品经理可绑定多个商品；按商品归属的产品经理聚合。绑定关系变更时按退款发生时的归属计算。</div>
 <button class="close" id="hClose">知道了</button>
@@ -338,9 +338,9 @@ body{background:#edf3ee}
         <li><strong>产品经理不做权限隔离</strong>。</li>
       </ol></section>
       <section class="requirements-section"><h3><span>04</span>退款金额合计</h3><ol class="requirements-list">
-        <li><strong>超时自动退单金额：</strong>订单超时未取货，由系统自动退单所产生的退款金额。</li>
-        <li><strong>未取货仅退款金额：</strong>用户未取货之前，由<strong>用户或店员主动发起退款并退款成功</strong>的金额。</li>
-        <li><strong>已取货退货退款金额：</strong>商品已完成核销后，由门店主动发起退货退款的金额。</li>
+        <li><strong>超时自动退单金额：</strong>订单超时未取货，由系统自动退单所产生的金额。</li>
+        <li><strong>未取货仅退款金额：</strong>用户未取货之前，由<strong>用户或店员发起退款</strong>所产生的金额。</li>
+        <li><strong>已取货退货退款金额：</strong>商品已完成核销后，由门店发起退货退款所产生的金额。</li>
         <li><strong>异步退款（线下退款）：</strong>仅仅是<strong>标签标记</strong>，并非真正计入线下退款统计，<strong>归属至上述三类</strong>。</li>
         <li>金额合计为以上三类相加之和，且<strong>这三类互斥不重叠</strong>。</li>
         <li><strong>金额占比：</strong>该原因金额 ÷ 当前范围退款总额 × 100%，<strong>显示 2 位小数</strong>。</li>
