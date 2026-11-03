@@ -199,6 +199,36 @@ button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:default}b
 #drawer[data-mode=date]{overflow:hidden}
 .date-selection-summary{margin:12px 0 0;padding:11px 12px;background:#f4f8f5;border-radius:10px;font-size:13px;color:#627769;gap:6px}
 .date-selection-summary b{color:#3f5c48}
+
+/* Market selector: independent market and store columns. */
+.drawer[data-mode=market]{height:82%;max-height:88%;border-radius:26px 26px 0 0}
+
+
+
+
+
+.drawer[data-mode=market] .dbd{padding:0;display:flex;flex-direction:column;overflow:hidden}
+.org-root{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:58px;padding:15px 20px;background:#fff;border-bottom:1px solid #eeeef1;font-size:15px;color:#3d4941;flex:none;cursor:pointer}
+.org-root small{font-size:12px;margin-left:10px;color:#859188}
+.org-columns{display:grid;grid-template-columns:40% minmax(0,1fr);flex:1;min-height:0}
+.org-markets,.org-stores{min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.org-markets{background:#f8f8fb;border-right:1px solid #eeeef1}
+.org-market-row{display:flex;align-items:center;gap:9px;min-height:60px;padding-left:15px;border-bottom:1px solid #eeeef1}
+.org-market-row.active{background:#e7f5ee}
+.org-market-row>button{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:1px;flex:1;min-width:0;min-height:60px;padding:8px 6px 8px 0;border:0;background:none;color:#3d4941;font-size:15px;line-height:1.5;text-align:left}
+.org-market-row small{font-size:11px;color:#7b8a80;font-variant-numeric:tabular-nums}
+.org-market-row.active>button{color:#00874d;font-weight:600}
+.org-store-heading{display:flex;justify-content:space-between;align-items:center;gap:5px;font-size:12px;padding:12px 15px;background:#fcfdfc;color:#6d7b71;border-bottom:1px solid #eeeef1}
+.org-store-heading small{font-size:11px;white-space:nowrap;color:#8a968e}
+.org-store-row{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:60px;padding:15px;border-bottom:1px solid #eeeef1;font-size:14px;line-height:1.6;color:#424c45;cursor:pointer}
+.org-root input,.org-market-row>input,.org-store-row input{width:20px;height:20px;margin:0;accent-color:#00b775;flex:none;cursor:pointer}
+.org-store-row span{min-width:0;overflow-wrap:anywhere}
+.drawer[data-mode=market] .dft{flex-wrap:wrap;align-items:center;gap:10px;padding:13px 20px 26px;border-top:1px solid #eeeef1;box-shadow:none}
+
+#marketSelected{flex:0 0 100%;color:#788379;font-size:13px;line-height:1.6;margin-bottom:1px;white-space:nowrap}
+
+@media(max-width:360px){.org-root{padding:13px 15px}.org-root small{margin-left:6px;font-size:11px}.org-market-row{padding-left:11px;gap:7px}.org-market-row>button{font-size:14px}.org-store-row{padding:13px 11px;font-size:13px;gap:7px}.org-store-heading{padding:11px;font-size:11px}.org-store-heading small{font-size:10px}.drawer[data-mode=market] .dft{padding-left:18px;padding-right:18px}}
+.org-root input,.org-market-row>input,.org-store-row input{appearance:none;-webkit-appearance:none;border:1.5px solid #cdd7d0;border-radius:4px;background:#fff;display:grid;place-items:center}.org-root input:checked,.org-market-row>input:checked,.org-store-row input:checked{background-color:#00b775;border-color:#00b775;background-image:url("data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iaWNvbiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBhcmlhLWhpZGRlbj0idHJ1ZSI+IDxwYXRoIHN0cm9rZT0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPiA8cGF0aCBkPSJNNSAxMmw1IDVsMTAgLTEwIiAvPiA8L3N2Zz4=");background-position:center;background-size:17px;background-repeat:no-repeat}.org-root input:indeterminate,.org-market-row>input:indeterminate{appearance:auto;-webkit-appearance:checkbox;accent-color:#00874d}
 </style>
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iaWNvbiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGFyaWEtaGlkZGVuPSJ0cnVlIj4gPHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+IDxwYXRoIGQ9Ik01IDIxdi0xNmEyIDIgMCAwIDEgMiAtMmgxMGEyIDIgMCAwIDEgMiAydjE2bC0zIC0ybC0yIDJsLTIgLTJsLTIgMmwtMiAtMmwtMyAybTQgLTE0aDZtLTYgNGg2bS0yIDRoMiIgLz4gPC9zdmc+">
 </head>
@@ -243,7 +273,7 @@ button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:default}b
     <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dTitle" aria-hidden="true" inert>
       <div class="dhd"><b id="dTitle">筛选</b><button class="x" id="dClose" aria-label="关闭筛选"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path stroke="none" d="M0 0h24v24H0z" fill="none"/> <path d="M18 6l-12 12" /> <path d="M6 6l12 12" /> </svg></button></div>
       <div class="dbd" id="dBody"></div>
-      <div class="dft"><button id="dReset">重置</button><button class="ok" id="dOk">确定</button></div>
+      <div class="dft"><span id="marketSelected" role="status" aria-live="polite" hidden></span><button id="dReset">重置</button><button class="ok" id="dOk">确定</button></div>
     </div>
 
     <div class="hmask" id="hmask"></div>
@@ -251,8 +281,8 @@ button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:default}b
       <h4 id="helpTitle">规则说明</h4>
 <div class="it"><b>统计时间</b>按退款成功时间归属统计周期，而非下单时间或申请时间。</div>
 <div class="it"><b>退款金额合计</b>筛选时间段内实际退还用户的金额合计 = 以下三项之和，三项互斥不重叠。</div>
-<div class="it"><b>① 超时自动退单金额</b>订单超时未取货，由门店店员手动超时退单、系统自动退单所产生的退款金额。</div>
-<div class="it"><b>② 未取货申请退款金额</b>用户未取货之前，主动发起退款申请并退款成功的金额。</div>
+<div class="it"><b>① 超时自动退单金额</b>订单超时未取货，由系统自动退单所产生的退款金额。</div>
+<div class="it"><b>② 未取货申请仅退款金额</b>用户未取货之前，主动发起退款申请、或者后台主动仅退款、店长在手机端手动批量退款并退款成功的金额。</div>
 <div class="it"><b>③ 已取货退货退款金额</b>商品已完成核销后，由门店主动发起退货退款的金额。</div>
 <div class="it"><b>商品分类</b>两级结构。勾选一级分类即选中其下全部二级分类；也可展开单独勾选二级分类。</div>
 <div class="it"><b>产品经理</b>一个产品经理可绑定多个商品；按商品归属的产品经理聚合。绑定关系变更时按退款发生时的归属计算。</div>
@@ -816,6 +846,8 @@ function renderDimBody(dim,rows,drill){
 let dMode='scope';
 function openDrawer(mode,part='start'){
   dMode=mode;
+  $('#marketSelected').hidden=mode!=='market';
+  $('#dClose').setAttribute('aria-label',mode==='market'?'关闭市场/门店选择':'关闭筛选');
   drawerReturnFocus=document.activeElement;
   $('#drawer').dataset.mode=mode;
   $('#drawer').inert=false;
@@ -825,11 +857,12 @@ function openDrawer(mode,part='start'){
   tmp.cs=state.cs;tmp.ce=state.ce;tmp.kw='';
   if(mode==='date')initCalendar(part);
   tmp.exp=[];
+  if(mode==='market')tmp.activeMarket=(MARKETS.find(m=>m.stores.some(s=>tmp.mk.includes(s.id)))||MARKETS[0])?.id;
   // 分类模式：有已选则展开已选所在的一级；否则默认展开第一个一级分类（示例更直观）
   if(mode==='scope'&&tmp.mode==='category'){
     tmp.exp=tmp.c.length?[...new Set(tmp.c.map(id=>SUB[id].p))]:(CATS.length?[CATS[0].id]:[]);
   }
-  $('#dTitle').textContent=mode==='scope'?'选择商品 / 分类':(mode==='market'?'选择门店':(mode==='pm'?'选择产品经理':'筛选日期'));
+  $('#dTitle').textContent=mode==='scope'?'选择商品 / 分类':(mode==='market'?'选择市场/门店':(mode==='pm'?'选择产品经理':'筛选日期'));
   $('#dBody').scrollTop=0;
   drawBody();
   $('#dmask').classList.add('show');
@@ -945,61 +978,28 @@ function drawCat(){
 /* --- 门店（多选，按市场分组） --- */
 function drawMarket(){
   const b=$('#dBody');
-  const total=ALL_STORES.length;
-  const allOn=tmp.mk.length===total;
-  const kw=(tmp.kw||'').trim();
-  let h='<div class="srchw"><span class="ic">'+icon('search')+'</span><input id="mSearch" placeholder="搜索门店名称" value="'+esc(kw)+'"></div>';
-  h+='<div class="allrow" data-all="1"><span class="cbox '+(allOn?'on':(tmp.mk.length?'half':''))+'">'+(allOn?icon('check'):'')+'</span>'+
-     '<span class="tx">全选所有门店</span><span class="cnt">共 '+total+' 家</span>'+
-     '<span class="qk" data-qk="1">一键全选</span></div>';
-  h+='<div style="height:2px"></div>';
-  let listed=0;
-  MARKETS.forEach(m=>{
-    const ids=m.stores.map(s=>s.id);
-    const hit=ids.filter(id=>tmp.mk.includes(id));
-    const shown=m.stores.filter(s=>!kw||s.name.includes(kw)||tmp.mk.includes(s.id));
-    if(!shown.length)return;
-    const cls=hit.length===ids.length&&ids.length?'on':(hit.length?'half':'');
-    h+='<div class="mgrp" data-g="'+m.id+'"><span class="cbox '+cls+'">'+(hit.length===ids.length?icon('check'):'')+'</span>'+
-       '<span class="nm">'+m.name+'</span><span class="ct">'+hit.length+'/'+ids.length+'</span></div>';
-    shown.forEach(s=>{
-      listed++;
-      const on=tmp.mk.includes(s.id);
-      h+='<div class="srow" data-st="'+s.id+'"><span class="cbox '+(on?'on':'')+'">'+(on?icon('check'):'')+'</span>'+
-         '<span class="sic">'+icon('building-store')+'</span><span class="nm">'+s.name+'</span></div>';
-    });
+  const left=b.querySelector('.org-markets'),right=b.querySelector('.org-stores');
+  const leftScroll=left?left.scrollTop:0,rightScroll=right?right.scrollTop:0;
+  const active=MMAP[tmp.activeMarket]||MARKETS[0];
+  if(!active){b.innerHTML='<div class="empty">暂无可选市场/门店</div>';$('#marketSelected').textContent='已选：0 个门店';return;}
+  tmp.activeMarket=active.id;
+  const rootAll=ALL_STORES.length>0&&ALL_STORES.every(id=>tmp.mk.includes(id));
+  b.innerHTML='<label class="org-root"><span>全部市场<small>共 '+ALL_STORES.length+' 个门店</small></span><input type="checkbox" id="orgAll" aria-label="全选所有市场和门店" '+(rootAll?'checked':'')+'></label>'+
+    '<div class="org-columns"><div class="org-markets" role="group" aria-label="市场列表">'+MARKETS.map(m=>{
+      const count=m.stores.filter(st=>tmp.mk.includes(st.id)).length;
+      return '<div class="org-market-row'+(m.id===active.id?' active':'')+'"><input type="checkbox" data-market-check="'+m.id+'" aria-label="全选'+esc(m.name)+'门店" '+(count===m.stores.length&&count?'checked':'')+'><button type="button" data-market-open="'+m.id+'" aria-pressed="'+(m.id===active.id)+'" aria-controls="orgStoreList"><span>'+esc(m.name)+'</span><small>'+count+'/'+m.stores.length+'</small></button></div>';
+    }).join('')+'</div><div class="org-stores" id="orgStoreList" role="group" aria-label="'+esc(active.name)+'门店"><div class="org-store-heading">'+esc(active.name)+'<small>'+active.stores.length+' 个门店</small></div>'+active.stores.map(st=>'<label class="org-store-row"><span>'+esc(st.name)+'</span><input type="checkbox" data-store-check="'+st.id+'" '+(tmp.mk.includes(st.id)?'checked':'')+'></label>').join('')+'</div></div>';
+  $('#marketSelected').textContent='已选：'+tmp.mk.length+' 个门店';
+  const all=$('#orgAll');all.indeterminate=tmp.mk.length>0&&!rootAll;
+  all.onchange=()=>{tmp.mk=all.checked?[...ALL_STORES]:[];drawMarket();$('#orgAll').focus({preventScroll:true});};
+  b.querySelectorAll('[data-market-check]').forEach(input=>{
+    const ids=MMAP[input.dataset.marketCheck].stores.map(st=>st.id),count=ids.filter(id=>tmp.mk.includes(id)).length;
+    input.indeterminate=count>0&&count<ids.length;
+    input.onchange=()=>{const checked=input.checked,id=input.dataset.marketCheck;if(checked)tmp.mk=[...new Set([...tmp.mk,...ids])];else tmp.mk=tmp.mk.filter(id=>!ids.includes(id));drawMarket();b.querySelector('[data-market-check="'+id+'"]').focus({preventScroll:true});};
   });
-  if(!listed)h+='<div class="empty">未找到匹配门店</div>';
-  b.innerHTML=h;
-
-  const si=$('#mSearch');
-  si.oninput=e=>{
-    tmp.kw=e.target.value;
-    drawMarket();
-    const n=$('#mSearch');n.focus();n.setSelectionRange(n.value.length,n.value.length);
-  };
-  b.querySelectorAll('[data-qk]').forEach(el=>el.onclick=e=>{
-    e.stopPropagation();
-    tmp.mk=[...ALL_STORES];
-    drawMarket();
-  });
-  b.querySelectorAll('[data-all]').forEach(el=>el.onclick=e=>{
-    if(e.target.dataset.qk)return;
-    tmp.mk=tmp.mk.length===total?[]:[...ALL_STORES];
-    drawMarket();
-  });
-  b.querySelectorAll('.mgrp').forEach(el=>el.onclick=()=>{
-    const m=MMAP[el.dataset.g],ids=m.stores.map(s=>s.id);
-    const all=ids.every(id=>tmp.mk.includes(id));
-    if(all)tmp.mk=tmp.mk.filter(id=>!ids.includes(id));
-    else ids.forEach(id=>{if(!tmp.mk.includes(id))tmp.mk.push(id);});
-    drawMarket();
-  });
-  b.querySelectorAll('[data-st]').forEach(el=>el.onclick=()=>{
-    const id=el.dataset.st,i=tmp.mk.indexOf(id);
-    if(i>-1)tmp.mk.splice(i,1);else tmp.mk.push(id);
-    drawMarket();
-  });
+  b.querySelectorAll('[data-market-open]').forEach(button=>button.onclick=()=>{tmp.activeMarket=button.dataset.marketOpen;drawMarket();b.querySelector('.org-stores').scrollTop=0;b.querySelector('[data-market-open="'+tmp.activeMarket+'"]').focus({preventScroll:true});});
+  b.querySelectorAll('[data-store-check]').forEach(input=>input.onchange=()=>{const id=input.dataset.storeCheck;if(input.checked)tmp.mk=[...new Set([...tmp.mk,id])];else tmp.mk=tmp.mk.filter(v=>v!==id);drawMarket();b.querySelector('[data-store-check="'+id+'"]').focus({preventScroll:true});});
+  b.querySelector('.org-markets').scrollTop=leftScroll;b.querySelector('.org-stores').scrollTop=rightScroll;
 }
 
 /* --- 产品经理（多选，与门店一致） --- */
@@ -1132,7 +1132,7 @@ $('#btnClear').onclick=()=>{state.mode='product';state.p=[];state.c=[];state.mk=
 $('#pBack').onclick=()=>{if(state.detail==='store'&&state.storeM!==null){state.storeM=null;renderDetail();}else backHome();};
 $('#btnBack').onclick=()=>{
   const fromReports=document.referrer&&new URL(document.referrer).origin===location.origin&&(/\/(?:reports|index)\.html$/.test(new URL(document.referrer).pathname)||new URL(document.referrer).pathname.endsWith('/'));
-  if(fromReports&&history.length>1)history.back();else location.assign('reports.html?v=20261026-inventory-tag');
+  if(fromReports&&history.length>1)history.back();else location.assign('reports.html?v=20261103-footer-reset-2');
 };
 $('#btnHelp').onclick=()=>{helpReturnFocus=document.activeElement;$('#hbox').inert=false;$('#hbox').setAttribute('aria-hidden','false');$('#hmask').classList.add('show');$('#hbox').classList.add('show');lockBackground(true);$('#hClose').focus({preventScroll:true});};
 $('#hClose').onclick=closeHelp;$('#hmask').onclick=closeHelp;
