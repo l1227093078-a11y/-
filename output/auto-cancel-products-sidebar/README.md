@@ -15,3 +15,7 @@
 `npm run dev -- --host 0.0.0.0 --port 4173 --strictPort` 启动预览，`npm run build` 生成独立 `index.html` 与 `stats.html`；`npm test` 运行320/390/1280px浏览器验证。修改仅在本目录源文件生效。
 
 `python3 src/package.py` 生成 `../auto-cancel-products-sidebar-h5.zip`。图标来源及许可见 THIRD_PARTY_NOTICES.md，生成的绿色立体汇总图标位于 src/assets/。
+
+## 外侧需求说明
+
+电脑浏览器（960px及以上）左侧显示可交互手机样机，右侧固定显示用户提供的完整文档，文档独立滚动，首页与统计内页共用。窄屏继续显示原手机界面，文档不堆到下方。文档内容修改 src/requirements.html，外侧布局修改 src/requirements.css。此次按用户要求加入说明文档，未新增后端权限接口、订单页跳转或变更现有日期交互逻辑。
