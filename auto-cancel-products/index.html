@@ -17,6 +17,14 @@
 .market-card-meta{display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding-top:13px;margin-top:14px;border-top:1px solid #edf2ee;font-size:12px;line-height:1.8;color:#819788}.market-card-meta b{font-weight:600;color:#466c53;margin:0 2px}.market-divider{color:#b1c0b5;margin:0 3px}
 .detail-tools{position:sticky;top:0;z-index:2;background:#fff;padding:14px 19px;border-bottom:1px solid #e4ece6}.detail-date{display:flex;align-items:flex-start;gap:7px;font-size:12px;line-height:1.8;color:#708879}.detail-date img{width:15px;height:15px;margin-top:3px;opacity:.75}.detail-date>span:last-child{min-width:0}.detail-counts{margin:6px 0 11px;font-size:12px;line-height:1.7;color:#7b9282}.detail-tools .search-box{margin:0;background:#fafcfb}.detail-content{padding:14px 15px 0}
 @media(max-width:360px){.market-card{padding:15px 13px}.market-card-title strong{font-size:15px}.market-card-meta{gap:6px;font-size:11px}.detail-tools{padding:12px 15px}.detail-content{padding:12px 12px 0}}
+
+/* Emphasize the home summary on a white canvas. */
+.phone:has(#homeView:not([hidden])) .page-scroll,.phone:has(#homeView:not([hidden])) .home-indicator{background:#fff}
+#homeView{background:#fff;min-height:100%}
+.summary{background:#007f52;border-color:#007f52;box-shadow:0 8px 22px #007f5210}
+.summary-heading,.summary-number>span,.summary-meta{color:#f1faf5}
+.summary-number strong,.summary-meta b{color:#fff}
+.summary-meta{border-top-color:#ffffff38}
 </style></head>
 <body><main class="stage"><div class="phone" id="phone">
 <div class="app-content" id="appContent">
