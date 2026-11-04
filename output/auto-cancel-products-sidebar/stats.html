@@ -56,7 +56,6 @@
 .store-workspace{height:100%;display:grid;grid-template-columns:118px minmax(0,1fr);border-top:1px solid #e4ece7;background:#f4f8f5}
 .store-sidebar{min-width:0;min-height:0;display:flex;flex-direction:column;background:#edf3ef;border-right:1px solid #e1eae4}
 .store-sidebar-heading{flex:none;padding:13px 12px 10px;font-size:12px;font-weight:600;color:#617769;display:flex;justify-content:space-between;align-items:center}
-.store-sidebar-heading>span{font-weight:400;font-size:11px;color:#899d90}
 #storeNav{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding-bottom:22px;scrollbar-width:thin;scrollbar-color:#cfddd3 transparent}
 .store-tab{display:block;position:relative;width:100%;border:0;border-left:3px solid transparent;border-bottom:1px solid #e3ece6;border-radius:0;background:transparent;text-align:left;padding:14px 9px 13px 10px;color:#586f60;min-height:80px}
 .store-tab>span{display:block;font-size:13px;line-height:1.7;overflow-wrap:anywhere;text-wrap:balance}
@@ -106,7 +105,7 @@
 <section id="detailView" aria-label="市场门店数据" hidden>
 <div class="detail-tools"><div class="detail-date"><span data-icon="calendar"></span><span id="detailDate"></span></div><p class="detail-counts" id="detailCounts"></p>
 <div class="search-box"><span data-icon="search"></span><input id="searchInput" type="search" placeholder="搜索门店、商品名称或编码" aria-label="搜索门店、商品名称或编码"><button type="button" id="clearSearch" aria-label="清空搜索" hidden data-icon="x"></button></div>
-</div><div class="detail-content"><div class="store-workspace"><aside class="store-sidebar" aria-label="门店列表"><div class="store-sidebar-heading">门店 <span id="storeNavCount"></span></div><nav id="storeNav" aria-label="切换门店"></nav></aside><section class="store-products" id="productPanel" aria-label="所选门店商品"><div id="detailList" aria-live="polite"></div><p class="list-end" id="detailEnd"></p></section></div></div>
+</div><div class="detail-content"><div class="store-workspace"><aside class="store-sidebar" aria-label="门店列表"><div class="store-sidebar-heading">门店</div><nav id="storeNav" aria-label="切换门店"></nav></aside><section class="store-products" id="productPanel" aria-label="所选门店商品"><div id="detailList" aria-live="polite"></div><p class="list-end" id="detailEnd"></p></section></div></div>
 </section></div>
 </div>
 <div id="backdrop" class="backdrop" hidden></div>
@@ -323,7 +322,6 @@ function renderDetail(){
  const selected=stores.find(s=>s.id===state.activeStore);
  $('#detailDate').textContent=state.start===state.end?state.start:state.start+' 至 '+state.end;
  $('#detailCounts').textContent='关联门店：'+stores.length+'家 I 商品种类数：'+kinds;
- $('#storeNavCount').textContent=stores.length;
  $('#storeNav').innerHTML=stores.length?stores.map(s=>'<button type="button" class="store-tab'+(s.id===state.activeStore?' active':'')+'" data-store-tab="'+s.id+'" aria-pressed="'+(s.id===state.activeStore)+'" aria-controls="detailList"><span>'+esc(s.name)+'</span><small>商品种类数：'+s.goods.length+'</small></button>').join(''):'<p class="sidebar-empty">暂无门店</p>';
  $('#storeNav').scrollTop=navScroll;
  $('#detailList').innerHTML=selected?storeMarkup(selected):emptyMarkup(true);

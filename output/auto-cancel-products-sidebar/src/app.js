@@ -30,7 +30,6 @@ function renderDetail(){
  const selected=stores.find(s=>s.id===state.activeStore);
  $('#detailDate').textContent=state.start===state.end?state.start:state.start+' 至 '+state.end;
  $('#detailCounts').textContent='关联门店：'+stores.length+'家 I 商品种类数：'+kinds;
- $('#storeNavCount').textContent=stores.length;
  $('#storeNav').innerHTML=stores.length?stores.map(s=>'<button type="button" class="store-tab'+(s.id===state.activeStore?' active':'')+'" data-store-tab="'+s.id+'" aria-pressed="'+(s.id===state.activeStore)+'" aria-controls="detailList"><span>'+esc(s.name)+'</span><small>商品种类数：'+s.goods.length+'</small></button>').join(''):'<p class="sidebar-empty">暂无门店</p>';
  $('#storeNav').scrollTop=navScroll;
  $('#detailList').innerHTML=selected?storeMarkup(selected):emptyMarkup(true);
