@@ -9,3 +9,10 @@
 .summary-meta{flex-wrap:wrap;gap:6px 14px}.summary-meta>span{white-space:nowrap}
 
 .calendar-presets{display:flex;gap:3px;flex:none}.calendar-presets button{border:0;border-radius:6px;background:#f3f7f4;color:#83978a;font-size:11px;padding:6px;min-height:32px;white-space:nowrap}.calendar-presets button.active{background:#e7f5ed;color:var(--green);font-weight:600}.form-error:empty{display:none}@media(max-width:360px){.calendar-nav button{width:26px;padding:5px}.calendar-presets button{font-size:10px;padding:5px}}
+
+/* Market summary cards on home, scoped store detail and search inside. */
+.market-card{display:block;width:100%;border:1px solid #dfe9e2;border-radius:16px;background:white;padding:17px 16px;margin:14px 0 0;text-align:left;color:var(--ink)}
+.market-card-title{display:flex;align-items:center;gap:10px}.market-icon{display:grid;place-items:center;flex:none;width:34px;height:34px;border-radius:11px;background:#edf7f0}.market-icon img{width:19px;height:19px}.market-card-title strong{flex:1;min-width:0;font-size:16px;font-weight:650;overflow-wrap:anywhere}.market-chevron img{width:17px;height:17px;opacity:.65}
+.market-card-meta{display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding-top:13px;margin-top:14px;border-top:1px solid #edf2ee;font-size:12px;line-height:1.8;color:#819788}.market-card-meta b{font-weight:600;color:#466c53;margin:0 2px}.market-divider{color:#b1c0b5;margin:0 3px}
+.detail-tools{position:sticky;top:0;z-index:2;background:#fff;padding:14px 19px;border-bottom:1px solid #e4ece6}.detail-date{display:flex;align-items:flex-start;gap:7px;font-size:12px;line-height:1.8;color:#708879}.detail-date img{width:15px;height:15px;margin-top:3px;opacity:.75}.detail-date>span:last-child{min-width:0}.detail-counts{margin:6px 0 11px;font-size:12px;line-height:1.7;color:#7b9282}.detail-tools .search-box{margin:0;background:#fafcfb}.detail-content{padding:14px 15px 0}
+@media(max-width:360px){.market-card{padding:15px 13px}.market-card-title strong{font-size:15px}.market-card-meta{gap:6px;font-size:11px}.detail-tools{padding:12px 15px}.detail-content{padding:12px 12px 0}}

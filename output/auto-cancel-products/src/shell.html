@@ -3,18 +3,21 @@
 <body><main class="stage"><div class="phone" id="phone">
 <div class="app-content" id="appContent">
 __STATUS__
-<header class="nav"><a class="icon-button" href="../reports.html" aria-label="返回经营报表" data-icon="chevron-left"></a><h1>超时自动退单商品</h1><button class="info-button" id="infoButton" type="button">说明</button></header>
-<div class="page-scroll" id="pageScroll">
+<header class="nav"><a class="icon-button" id="navBack" href="../reports.html" aria-label="返回经营报表" data-icon="chevron-left"></a><h1 id="navTitle">超时自动退单商品</h1><button class="info-button" id="infoButton" type="button">说明</button></header>
+<div class="page-scroll" id="pageScroll"><div id="homeView">
 <section class="filters" aria-label="筛选条件">
 <div class="filter-row"><span class="filter-label">关联组织</span><button type="button" class="filter-control" id="orgButton" aria-haspopup="dialog"><span id="orgLabel">全部组织</span><span data-icon="chevron-down"></span></button></div>
 <div class="filter-row"><span class="filter-label">统计日期</span><button type="button" class="filter-control" id="dateButton" aria-haspopup="dialog"><span class="date-value"><span data-icon="calendar"></span><span id="dateLabel"></span></span><span data-icon="chevron-down"></span></button></div>
 </section>
 <div class="content">
 <section class="summary" aria-label="当前筛选汇总"><div class="summary-heading"><span>商品种类数合计</span></div><div class="summary-number"><strong id="totalProducts">24</strong><span>种</span></div><div class="summary-meta"><span>关联门店：<b id="totalStores">12</b>家</span><span>商品种类数（去重）：<b id="distinctProducts">10</b></span></div></section>
-<div class="list-heading"><h2>商品明细</h2></div>
-<div class="search-box"><span data-icon="search"></span><input id="searchInput" type="search" placeholder="搜索商品名称或编码" aria-label="搜索商品名称或编码"><button type="button" id="clearSearch" aria-label="清空搜索" hidden data-icon="x"></button></div>
 <div id="resultList" aria-live="polite"></div><p class="list-end" id="listEnd"></p>
 </div></div>
+<section id="detailView" aria-label="市场门店数据" hidden>
+<div class="detail-tools"><div class="detail-date"><span data-icon="calendar"></span><span id="detailDate"></span></div><p class="detail-counts" id="detailCounts"></p>
+<div class="search-box"><span data-icon="search"></span><input id="searchInput" type="search" placeholder="搜索商品名称或编码" aria-label="搜索商品名称或编码"><button type="button" id="clearSearch" aria-label="清空搜索" hidden data-icon="x"></button></div>
+</div><div class="detail-content"><div id="detailList" aria-live="polite"></div><p class="list-end" id="detailEnd"></p></div>
+</section></div>
 </div>
 <div id="backdrop" class="backdrop" hidden></div>
 <section class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" hidden><div class="sheet-grip"></div><header class="sheet-header"><h2 id="sheetTitle"></h2><button type="button" id="closeSheet" class="close-button" aria-label="关闭" data-icon="x"></button></header><div class="sheet-body" id="sheetBody"></div><footer class="sheet-footer" id="sheetFooter"><span id="selectionCount" role="status" hidden></span><button type="button" id="resetSheet" class="secondary">重置</button><button type="button" id="confirmSheet" class="primary">确定</button></footer></section>
