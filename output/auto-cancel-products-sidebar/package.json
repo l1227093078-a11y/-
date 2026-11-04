@@ -1,0 +1,10 @@
+{
+  "name": "auto-cancel-products-sidebar-h5",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "python3 src/build.py",
+    "dev": "node src/dev.cjs",
+    "test": "node src/verify-sidebar.cjs"
+  }
+}
