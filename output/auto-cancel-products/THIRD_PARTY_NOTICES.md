@@ -27,12 +27,3 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
-
-
-## Solar Icons
-
-The summary icons use `box-minimalistic-bold-duotone` and `shop-2-bold-duotone` from Solar Icons by **480 Design**, distributed through `@iconify-json/solar` 1.2.13.
-
-- Author/source: https://www.figma.com/community/file/1166831539721848736
-- License: Creative Commons Attribution 4.0 International (CC BY 4.0), https://creativecommons.org/licenses/by/4.0/
-- Changes: recolored green and scaled for the statistic cards; original icon geometry retained.
