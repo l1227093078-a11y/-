@@ -84,6 +84,14 @@
 .store-products .empty p{font-size:12px}
 .sidebar-empty{font-size:11px;color:#8b9d91;margin:18px 12px}
 @media(max-width:360px){.store-workspace{grid-template-columns:100px minmax(0,1fr)}.store-tab{padding:12px 7px 12px 8px}.store-tab>span{font-size:12px}.store-tab>small{font-size:9px}.store-products{padding:10px 8px 25px}.store-products .store-header{padding:1px 2px 12px}.store-products .store-icon{display:none}.store-products .goods-list{margin:0;padding:0 9px}.store-products .goods-code{font-size:10px}.store-products .goods-name{font-size:12px}}
+
+/* Three-column market overview, value above label. */
+.detail-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:0 0 13px}
+.detail-metric{min-width:0;min-height:76px;padding:10px 6px;background:#f2f7f4;border-radius:7px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;text-align:center}
+.detail-metric-value{display:flex;flex-direction:column;justify-content:center;min-height:26px;max-width:100%;font-size:18px;line-height:1.4;font-weight:500;color:#314b3b;font-variant-numeric:tabular-nums;white-space:nowrap}
+.detail-metric-value.metric-date{font-size:12px;font-weight:400;gap:1px}
+.detail-metric-label{font-size:12px;line-height:1.5;color:#718778}
+@media(max-width:360px){.detail-metrics{gap:7px}.detail-metric{padding:10px 4px}.detail-metric-value.metric-date{font-size:11px}.detail-metric-label{font-size:11px}}
 </style></head>
 <!-- Summary icons: custom green 3D assets generated for this prototype. -->
 <body><main class="stage"><div class="phone" id="phone">
@@ -102,7 +110,7 @@
 <div id="resultList" aria-live="polite"></div><p class="list-end" id="listEnd"></p>
 </div></div>
 <section id="detailView" aria-label="市场门店数据" hidden>
-<div class="detail-tools"><div class="detail-date"><span data-icon="calendar"></span><span id="detailDate"></span></div><p class="detail-counts" id="detailCounts"></p>
+<div class="detail-tools"><div class="detail-metrics" role="group" aria-label="市场数据概览"><div class="detail-metric"><div class="detail-metric-value metric-date" id="detailDate"></div><span class="detail-metric-label">日期</span></div><div class="detail-metric"><div class="detail-metric-value" id="detailStoreCount"></div><span class="detail-metric-label">关联门店</span></div><div class="detail-metric"><div class="detail-metric-value" id="detailProductCount"></div><span class="detail-metric-label">商品种类</span></div></div>
 <div class="search-box"><span data-icon="search"></span><input id="searchInput" type="search" placeholder="搜索门店、商品名称或编码" aria-label="搜索门店、商品名称或编码"><button type="button" id="clearSearch" aria-label="清空搜索" hidden data-icon="x"></button></div>
 </div><div class="detail-content"><div class="store-workspace"><aside class="store-sidebar" aria-label="门店列表"><nav id="storeNav" aria-label="切换门店"></nav></aside><section class="store-products" id="productPanel" aria-label="所选门店商品"><div id="detailList" aria-live="polite"></div><p class="list-end" id="detailEnd"></p></section></div></div>
 </section></div>
@@ -319,8 +327,9 @@ function renderDetail(){
  const previous=state.activeStore,navScroll=$('#storeNav').scrollTop;
  if(!stores.some(s=>s.id===state.activeStore))state.activeStore=stores[0]?.id||null;
  const selected=stores.find(s=>s.id===state.activeStore);
- $('#detailDate').textContent=state.start===state.end?state.start:state.start+' 至 '+state.end;
- $('#detailCounts').textContent='关联门店：'+stores.length+'家 I 商品种类数：'+kinds;
+ $('#detailDate').innerHTML=state.start===state.end?esc(state.start):'<span>'+esc(state.start)+'</span><span>至 '+esc(state.end)+'</span>';
+ $('#detailStoreCount').textContent=stores.length+'家';
+ $('#detailProductCount').textContent=kinds+'种';
  $('#storeNav').innerHTML=stores.length?stores.map(s=>'<button type="button" class="store-tab'+(s.id===state.activeStore?' active':'')+'" data-store-tab="'+s.id+'" aria-pressed="'+(s.id===state.activeStore)+'" aria-controls="detailList"><span>'+esc(s.name)+'</span><small>商品种类数：'+s.goods.length+'</small></button>').join(''):'<p class="sidebar-empty">暂无门店</p>';
  $('#storeNav').scrollTop=navScroll;
  $('#detailList').innerHTML=selected?storeMarkup(selected):emptyMarkup(true);
