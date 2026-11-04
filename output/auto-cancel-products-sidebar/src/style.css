@@ -91,3 +91,6 @@
 .detail-metric-value.metric-date{font-size:12px;font-weight:400;gap:1px}
 .detail-metric-label{font-size:12px;line-height:1.5;color:#718778}
 @media(max-width:360px){.detail-metrics{gap:7px}.detail-metric{padding:10px 4px}.detail-metric-value.metric-date{font-size:11px}.detail-metric-label{font-size:11px}}
+
+/* Match painted icon size despite different transparent asset padding. */
+.summary-icon[data-icon="summary-products"] img{transform:scale(1.14)}
