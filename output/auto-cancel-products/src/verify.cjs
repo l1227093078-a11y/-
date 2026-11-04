@@ -1,7 +1,7 @@
 const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),http=require('node:http');
 const root=path.resolve(__dirname,'..');
 (async()=>{
- const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://localhost'),file=u.pathname==='/reference.html'?path.resolve(root,'../refund-report-mobile/refund.html'):path.join(root,'index.html');res.writeHead(200,{'Content-Type':'text/html;charset=utf-8'});res.end(fs.readFileSync(file));});await new Promise(r=>server.listen(0,'127.0.0.1',r));
+ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://localhost'),file=u.pathname==='/reference.html'?path.resolve(root,'../refund-report-mobile/refund.html'):path.join(root,'stats.html');res.writeHead(200,{'Content-Type':'text/html;charset=utf-8'});res.end(fs.readFileSync(file));});await new Promise(r=>server.listen(0,'127.0.0.1',r));
  const b=await chromium.launch({executablePath:process.env.CHROME_PATH||'/usr/bin/chromium',headless:true,args:['--no-sandbox']});const errors=[],results=[];fs.mkdirSync(path.join(root,'previews'),{recursive:true});
  try{
   for(const size of [{width:320,height:600},{width:390,height:844},{width:1280,height:1000}]){

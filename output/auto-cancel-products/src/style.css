@@ -40,3 +40,9 @@
 .org-selection-tag{display:block;flex:0 1 auto;min-width:0;max-width:140px;padding:3px 6px;border-radius:5px;background:#ebf7ef;color:#008b5a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.65;font-size:13px}
 .org-selection-more{flex:none;display:block;padding:3px 6px;border-radius:5px;background:#ebf7ef;color:#008b5a;font-size:13px;line-height:1.65}
 #orgButton>span:last-child{flex:none}
+
+.goods-name{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.goods-name>span:first-child{min-width:0;overflow-wrap:anywhere}
+.goods-chevron{flex:none;display:grid;place-items:center;width:18px;height:20px;opacity:.65}
+.goods-chevron img{width:16px;height:16px}
+@media(max-width:360px){.nav{grid-template-columns:40px 1fr 40px}.nav h1{font-size:16px;letter-spacing:0}}

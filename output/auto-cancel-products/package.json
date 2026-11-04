@@ -5,6 +5,6 @@
   "scripts": {
     "build": "python3 src/build.py",
     "dev": "node src/dev.cjs",
-    "test": "node src/verify.cjs"
+    "test": "node src/verify.cjs && node src/verify-navigation.cjs"
   }
 }
