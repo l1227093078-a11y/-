@@ -83,3 +83,11 @@
 .store-products .empty p{font-size:12px}
 .sidebar-empty{font-size:11px;color:#8b9d91;margin:18px 12px}
 @media(max-width:360px){.store-workspace{grid-template-columns:100px minmax(0,1fr)}.store-tab{padding:12px 7px 12px 8px}.store-tab>span{font-size:12px}.store-tab>small{font-size:9px}.store-products{padding:10px 8px 25px}.store-products .store-header{padding:1px 2px 12px}.store-products .store-icon{display:none}.store-products .goods-list{margin:0;padding:0 9px}.store-products .goods-code{font-size:10px}.store-products .goods-name{font-size:12px}}
+
+/* Three-column market overview, value above label. */
+.detail-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:0 0 13px}
+.detail-metric{min-width:0;min-height:76px;padding:10px 6px;background:#f2f7f4;border-radius:7px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;text-align:center}
+.detail-metric-value{display:flex;flex-direction:column;justify-content:center;min-height:26px;max-width:100%;font-size:18px;line-height:1.4;font-weight:500;color:#314b3b;font-variant-numeric:tabular-nums;white-space:nowrap}
+.detail-metric-value.metric-date{font-size:12px;font-weight:400;gap:1px}
+.detail-metric-label{font-size:12px;line-height:1.5;color:#718778}
+@media(max-width:360px){.detail-metrics{gap:7px}.detail-metric{padding:10px 4px}.detail-metric-value.metric-date{font-size:11px}.detail-metric-label{font-size:11px}}

@@ -28,8 +28,9 @@ function renderDetail(){
  const previous=state.activeStore,navScroll=$('#storeNav').scrollTop;
  if(!stores.some(s=>s.id===state.activeStore))state.activeStore=stores[0]?.id||null;
  const selected=stores.find(s=>s.id===state.activeStore);
- $('#detailDate').textContent=state.start===state.end?state.start:state.start+' 至 '+state.end;
- $('#detailCounts').textContent='关联门店：'+stores.length+'家 I 商品种类数：'+kinds;
+ $('#detailDate').innerHTML=state.start===state.end?esc(state.start):'<span>'+esc(state.start)+'</span><span>至 '+esc(state.end)+'</span>';
+ $('#detailStoreCount').textContent=stores.length+'家';
+ $('#detailProductCount').textContent=kinds+'种';
  $('#storeNav').innerHTML=stores.length?stores.map(s=>'<button type="button" class="store-tab'+(s.id===state.activeStore?' active':'')+'" data-store-tab="'+s.id+'" aria-pressed="'+(s.id===state.activeStore)+'" aria-controls="detailList"><span>'+esc(s.name)+'</span><small>商品种类数：'+s.goods.length+'</small></button>').join(''):'<p class="sidebar-empty">暂无门店</p>';
  $('#storeNav').scrollTop=navScroll;
  $('#detailList').innerHTML=selected?storeMarkup(selected):emptyMarkup(true);
