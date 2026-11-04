@@ -5,3 +5,5 @@
 .filter-control.range{height:59px}.filter-control.range #dateLabel{display:block;white-space:normal;font-size:12px;line-height:1.6}.filter-control.range #dateLabel>span{display:block;white-space:nowrap}.calendar-picking{font-size:11px;color:#8b9e91;white-space:nowrap}.calendar-day.in-range{background:#edf8f0}.range-end-row{margin-top:10px}.calendar-hint{margin-top:14px}
 
 .calendar-day{aspect-ratio:auto;height:44px}.date-range-inputs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px;padding-top:14px;border-top:1px solid #edf2ee}.date-range-inputs .date-input-row{flex-direction:column;align-items:stretch;gap:6px;padding:0;border:0;margin:0;font-size:12px}.date-range-inputs input{width:100%;max-width:none;padding:8px;min-width:0}
+
+.summary-meta{flex-wrap:wrap;gap:6px 14px}.summary-meta>span{white-space:nowrap}
