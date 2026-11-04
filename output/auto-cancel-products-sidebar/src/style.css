@@ -94,3 +94,10 @@
 
 /* Match painted icon size despite different transparent asset padding. */
 .summary-icon[data-icon="summary-products"] img{transform:scale(1.14)}
+
+/* Equal-width date shortcuts with larger touch targets. */
+.calendar-top{gap:6px}
+.calendar-nav{gap:4px}
+.calendar-presets{display:grid;grid-template-columns:repeat(3,52px);gap:4px}
+.calendar-presets button{width:100%;min-height:44px;padding:8px 3px;display:flex;align-items:center;justify-content:center;font-size:11px}
+@media(max-width:360px){.calendar-nav{gap:2px}.calendar-presets{grid-template-columns:repeat(3,44px)}.calendar-presets button{font-size:11px;padding:8px 2px}}
