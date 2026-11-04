@@ -17,12 +17,20 @@
 .detail-tools{position:sticky;top:0;z-index:2;background:#fff;padding:14px 19px;border-bottom:1px solid #e4ece6}.detail-date{display:flex;align-items:flex-start;gap:7px;font-size:12px;line-height:1.8;color:#708879}.detail-date img{width:15px;height:15px;margin-top:3px;opacity:.75}.detail-date>span:last-child{min-width:0}.detail-counts{margin:6px 0 11px;font-size:12px;line-height:1.7;color:#7b9282}.detail-tools .search-box{margin:0;background:#fafcfb}.detail-content{padding:14px 15px 0}
 @media(max-width:360px){.market-card{padding:15px 13px}.market-card-title strong{font-size:15px}.market-card-meta{gap:6px;font-size:11px}.detail-tools{padding:12px 15px}.detail-content{padding:12px 12px 0}}
 
-/* Emphasize the home summary on a white canvas. */
+/* Two compact statistic cards, inspired by the supplied wallet reference. */
 .phone:has(#homeView:not([hidden])) .page-scroll,.phone:has(#homeView:not([hidden])) .home-indicator{background:#fff}
 #homeView{background:#fff;min-height:100%}
-.summary{background:linear-gradient(120deg,#e4f6eb 0%,#f1faf4 47%,#d8f0e0 100%);border-color:#d1e8d9;box-shadow:inset 0 1px 0 #ffffffcc,0 8px 22px #2b6b3d0a}
-.summary-heading,.summary-number>span,.summary-meta{color:#476e54}
-.summary-number strong,.summary-meta b{color:#00834f}
-.summary-meta{border-top-color:#ffffff38}
-
-.filters{border-bottom:0}.summary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:start}.summary-metric+.summary-metric{border-left:1px solid #c0dfca;padding-left:22px}.summary-heading,.summary-number>span{color:#476e54}.market-list-heading{margin:22px 3px 0;font-size:16px;line-height:1.6;font-weight:650}@media(max-width:360px){.summary-grid{gap:12px}.summary-metric+.summary-metric{padding-left:16px}.summary-heading{font-size:12px}}
+.filters{border-bottom:0}
+.summary{padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+.summary-title{margin:0 3px 12px;font-size:16px;line-height:1.6;font-weight:650;color:var(--ink)}
+.summary-title>span{font-size:12px;font-weight:400;color:#707a73;margin-left:4px}
+.summary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:stretch}
+.summary-metric{position:relative;overflow:hidden;min-height:112px;padding:17px 14px 16px;border:1px solid #dcefe4;border-radius:14px;background:radial-gradient(ellipse at 100% 0%,#ffffff99,transparent 70%),linear-gradient(130deg,#e8f8ef 0%,#def3e9 100%);box-shadow:inset 0 1px 0 #ffffffa6}
+.summary-number{margin-top:0;gap:6px}
+.summary-number strong{font-size:30px;line-height:1.25;font-weight:650;letter-spacing:-.5px;color:#009570}
+.summary-number>span{font-size:12px;color:#536f60}
+.summary-heading{margin-top:5px;font-size:12px;line-height:1.7;color:#536f60;padding-right:33px}
+.summary-icon{position:absolute;right:12px;bottom:17px;width:34px;height:34px}
+.summary-icon img{width:100%;height:100%;object-fit:contain}
+.market-list-heading{margin:22px 3px 0;font-size:16px;line-height:1.6;font-weight:650}
+@media(max-width:360px){.summary-grid{gap:10px}.summary-metric{padding:16px 12px;min-height:106px}.summary-number strong{font-size:28px}.summary-heading{font-size:11px;padding-right:29px}.summary-icon{right:10px;bottom:16px;width:31px;height:31px}}
