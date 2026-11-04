@@ -21,10 +21,12 @@
 /* Emphasize the home summary on a white canvas. */
 .phone:has(#homeView:not([hidden])) .page-scroll,.phone:has(#homeView:not([hidden])) .home-indicator{background:#fff}
 #homeView{background:#fff;min-height:100%}
-.summary{background:radial-gradient(ellipse at 0% 0%,#ffffff14,transparent 62%),linear-gradient(125deg,#005b42 0%,#00794f 57%,#008254 100%);border-color:#006d49;box-shadow:inset 0 1px 0 #ffffff2b,inset 0 0 0 1px #ffffff08,0 10px 24px #006e4817,0 2px 6px #004d3110}
+.summary{background:radial-gradient(ellipse at 0% 0%,#ffffff14,transparent 62%),linear-gradient(125deg,#004b3b 0%,#006e4d 43%,#008657 100%);border-color:#006d49;box-shadow:inset 0 1px 0 #ffffff2b,inset 0 0 0 1px #ffffff08,0 10px 24px #006e4817,0 2px 6px #004d3110}
 .summary-heading,.summary-number>span,.summary-meta{color:#f1faf5}
 .summary-number strong,.summary-meta b{color:#fff}
 .summary-meta{border-top-color:#ffffff38}
+
+.filters{border-bottom:0}.summary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:start}.summary-metric+.summary-metric{border-left:1px solid #ffffff33;padding-left:22px}.summary-heading,.summary-number>span{color:#fff}.market-list-heading{margin:22px 3px 0;font-size:16px;line-height:1.6;font-weight:650}@media(max-width:360px){.summary-grid{gap:12px}.summary-metric+.summary-metric{padding-left:16px}.summary-heading{font-size:12px}}
 </style></head>
 <body><main class="stage"><div class="phone" id="phone">
 <div class="app-content" id="appContent">
@@ -37,7 +39,8 @@
 <div class="filter-row"><span class="filter-label">统计日期</span><button type="button" class="filter-control" id="dateButton" aria-haspopup="dialog"><span class="date-value"><span data-icon="calendar"></span><span id="dateLabel"></span></span><span data-icon="chevron-down"></span></button></div>
 </section>
 <div class="content">
-<section class="summary" aria-label="当前筛选汇总"><div class="summary-heading"><span>商品种类数合计</span></div><div class="summary-number"><strong id="totalProducts">24</strong><span>种</span></div><div class="summary-meta"><span>关联门店：<b id="totalStores">12</b>家</span><span>商品种类数（去重）：<b id="distinctProducts">10</b></span></div></section>
+<section class="summary" aria-label="当前筛选汇总"><div class="summary-grid"><div class="summary-metric"><div class="summary-heading"><span>商品种类数合计</span></div><div class="summary-number"><strong id="totalProducts">24</strong><span>种</span></div></div><div class="summary-metric"><div class="summary-heading"><span>关联门店数</span></div><div class="summary-number"><strong id="totalStores">12</strong><span>家</span></div></div></div></section>
+<h2 class="market-list-heading">市场明细</h2>
 <div id="resultList" aria-live="polite"></div><p class="list-end" id="listEnd"></p>
 </div></div>
 <section id="detailView" aria-label="市场门店数据" hidden>
@@ -229,7 +232,7 @@ let mode='',draft=null,returnFocus=null,month=state.start.slice(0,7),activeGroup
 function getRows(keyword=state.page==='detail'?state.keyword:''){if(FIXTURE_DATE<state.start||FIXTURE_DATE>state.end)return [];const kw=keyword.trim().toLocaleLowerCase();return GROUPS.map(g=>({...g,stores:g.stores.filter(s=>state.storeIds.includes(s.id)).map(s=>{const allGoods=[...new Map(s.products.map(id=>PRODUCTS.get(id)).filter(Boolean).map(p=>[p.code,p])).values()];const goods=allGoods.filter(p=>!kw||p.name.toLocaleLowerCase().includes(kw)||p.code.toLowerCase().includes(kw));return {...s,goods};}).filter(s=>s.goods.length)})).filter(g=>g.stores.length);}
 function render(){const rows=getRows(''),stores=rows.flatMap(g=>g.stores),goods=stores.flatMap(s=>s.goods);$('#dateLabel').innerHTML=state.start===state.end?esc(state.start)+(state.start===today()?' · 今日':''):'<span>'+esc(state.start)+'</span><span>至 '+esc(state.end)+'</span>';$('#dateButton').classList.toggle('range',state.start!==state.end);const selectedGroups=GROUPS.filter(g=>g.stores.some(s=>state.storeIds.includes(s.id)));$('#orgLabel').textContent=state.storeIds.length===STORE_IDS.length?'全部组织 · '+STORE_IDS.length+' 家门店':state.storeIds.length===1?STORES.find(s=>s.id===state.storeIds[0]).name:selectedGroups.length===1?selectedGroups[0].name+' · '+state.storeIds.length+' 家门店':'已选 '+selectedGroups.length+' 个组织 · '+state.storeIds.length+' 家门店';
 $('#orgButton').setAttribute('aria-label','选择组织，当前'+$('#orgLabel').textContent);$('#dateButton').setAttribute('aria-label','选择统计日期，当前'+state.start+'至'+state.end);
-$('#totalProducts').textContent=goods.length;$('#totalStores').textContent=stores.length;$('#distinctProducts').textContent=new Set(goods.map(p=>p.code)).size;$('#clearSearch').hidden=!state.keyword;
+$('#totalProducts').textContent=goods.length;$('#totalStores').textContent=stores.length;$('#clearSearch').hidden=!state.keyword;
 const inDetail=state.page==='detail';$('#homeView').hidden=inDetail;$('#detailView').hidden=!inDetail;const market=GROUPS.find(g=>g.id===state.market);$('#navTitle').textContent=inDetail&&market?market.name:'超时自动退单商品';$('#navBack').setAttribute('aria-label',inDetail?'返回市场首页':'返回经营报表');document.title=inDetail&&market?market.name+' · 超时自动退单商品':'超时自动退单商品';
 if(!stores.length){$('#resultList').innerHTML=emptyMarkup(false);$('#listEnd').textContent='';}else{
  $('#resultList').innerHTML=rows.map(g=>{const n=new Set(g.stores.flatMap(s=>s.goods.map(p=>p.code))).size;return '<button type="button" class="market-card" data-market="'+g.id+'" aria-label="'+esc(g.name)+'，关联门店'+g.stores.length+'家，商品种类数'+n+'，查看门店数据"><span class="market-card-title"><span class="market-icon">'+icon('building-store')+'</span><strong>'+esc(g.name)+'</strong><span class="market-chevron">'+icon('chevron-right')+'</span></span><span class="market-card-meta"><span>关联门店：<b>'+g.stores.length+'</b>家</span><span class="market-divider" aria-hidden="true">I</span><span>商品种类数：<b>'+n+'</b></span></span></button>';}).join('');$('#listEnd').textContent='已展示全部 '+rows.length+' 个组织';
