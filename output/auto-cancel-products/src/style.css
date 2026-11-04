@@ -20,7 +20,9 @@
 /* Emphasize the home summary on a white canvas. */
 .phone:has(#homeView:not([hidden])) .page-scroll,.phone:has(#homeView:not([hidden])) .home-indicator{background:#fff}
 #homeView{background:#fff;min-height:100%}
-.summary{background:radial-gradient(ellipse at 0% 0%,#ffffff14,transparent 62%),linear-gradient(125deg,#005b42 0%,#00794f 57%,#008254 100%);border-color:#006d49;box-shadow:inset 0 1px 0 #ffffff2b,inset 0 0 0 1px #ffffff08,0 10px 24px #006e4817,0 2px 6px #004d3110}
+.summary{background:radial-gradient(ellipse at 0% 0%,#ffffff14,transparent 62%),linear-gradient(125deg,#004b3b 0%,#006e4d 43%,#008657 100%);border-color:#006d49;box-shadow:inset 0 1px 0 #ffffff2b,inset 0 0 0 1px #ffffff08,0 10px 24px #006e4817,0 2px 6px #004d3110}
 .summary-heading,.summary-number>span,.summary-meta{color:#f1faf5}
 .summary-number strong,.summary-meta b{color:#fff}
 .summary-meta{border-top-color:#ffffff38}
+
+.filters{border-bottom:0}.summary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:start}.summary-metric+.summary-metric{border-left:1px solid #ffffff33;padding-left:22px}.summary-heading,.summary-number>span{color:#fff}.market-list-heading{margin:22px 3px 0;font-size:16px;line-height:1.6;font-weight:650}@media(max-width:360px){.summary-grid{gap:12px}.summary-metric+.summary-metric{padding-left:16px}.summary-heading{font-size:12px}}
