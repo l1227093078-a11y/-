@@ -1,0 +1,54 @@
+/* Reference-style tabular reports; columns remain readable on mobile. */
+#detailPage{inset:34px 0 20px;background:#fff}
+#detailPage .pnav{border-bottom:1px solid #edf1ee}
+#detailPage .pscroll{padding:0 0 24px}
+.table-report{padding:20px 14px 10px}
+.report-summary{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:17px;font-size:14px;line-height:1.6}
+.report-count{display:flex;align-items:center;gap:8px;color:#31483a}
+.report-count strong{font-size:14px;font-weight:600}
+.report-count>.icon{width:19px;height:19px;color:#789082}
+.report-unit{font-size:11px;color:#7a8b80;white-space:nowrap}
+.report-table-scroll{width:100%;overflow:auto;border:1px solid #dce4de;border-radius:5px;scrollbar-width:thin;scrollbar-color:#becfc3 #f4f7f5;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;isolation:isolate}
+.refund-table{width:800px;min-width:100%;table-layout:fixed;border-collapse:separate;border-spacing:0;color:#314239;font-size:13px;line-height:1.7;font-variant-numeric:tabular-nums}
+.refund-table col{width:160px}
+.refund-table .name-col{width:166px}
+.refund-table .total-col{width:144px}
+.refund-table thead th{position:sticky;top:0;z-index:2;background:#e6ebe7;font-weight:600;color:#364a3d;font-size:13px;border-bottom:1px solid #cbd7ce;white-space:nowrap;padding:13px 10px;text-align:right}
+.refund-table thead th:first-child{text-align:left}
+.refund-table td,.refund-table tbody th{padding:21px 12px;background:#fff;border-bottom:1px solid #e1e8e3;vertical-align:middle}
+.refund-table td{text-align:right;white-space:nowrap;font-weight:500}
+.refund-table td[data-amount=total]{font-weight:650;color:#244e37}
+.refund-table tbody th{text-align:left;font-size:13px;font-weight:600;overflow-wrap:anywhere}
+.refund-table tr:last-child td,.refund-table tr:last-child th{border-bottom:0}
+.refund-table tbody+tbody>tr:first-child td,.refund-table tbody+tbody>tr:first-child th{border-top:1px solid #e1e8e3}
+.refund-table th:first-child{position:sticky;left:0;z-index:1;box-shadow:1px 0 0 #dfe7e1}
+.refund-table thead th:first-child{z-index:3}
+.report-expand{display:flex;align-items:center;gap:8px;min-height:44px;width:100%;padding:0;background:none;border:0;color:inherit;font-weight:600;text-align:left;line-height:1.7}
+.report-expand>.icon{width:21px;height:21px;flex:none;color:#00b575}
+.report-expand>span{min-width:0}
+.category-parent td,.category-parent th{padding-top:12px!important;padding-bottom:12px!important}
+.refund-table .category-child td,.refund-table .category-child th{background:#f2f5f3;padding-top:14px;padding-bottom:14px;border-bottom:0}
+.refund-table .category-child th{padding-left:41px;font-weight:500;color:#586e60}
+.category-children[hidden]{display:none}
+.report-footnote{display:flex;justify-content:space-between;gap:12px;margin:13px 1px 0;font-size:11px;line-height:1.7;color:#87988c}
+.refund-table .report-empty td{height:120px;text-align:center;font-size:13px;color:#809186;white-space:normal;font-weight:400}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.store-sheet-mask{position:absolute;inset:0;background:#23382c60;backdrop-filter:blur(3px);z-index:31}
+.store-sheet{position:absolute;bottom:0;left:0;right:0;height:82%;max-height:calc(100% - 50px);background:#fff;border-radius:25px 25px 0 0;z-index:32;display:flex;flex-direction:column;box-shadow:0 -10px 35px #1c392c12;animation:refund-sheet-rise .26s cubic-bezier(.32,.72,0,1)}
+.store-sheet[hidden],.store-sheet-mask[hidden]{display:none}
+.store-sheet-grip{width:34px;height:4px;background:#dae6dd;border-radius:4px;margin:9px auto 0;flex:none}
+.store-sheet-header{position:relative;flex:none;padding:17px 56px 15px;border-bottom:1px solid #e8efea;text-align:center}
+.store-sheet-header h2{font-size:17px;line-height:1.5;margin:0;font-weight:650}
+.store-sheet-header p{margin:4px 0 0;font-size:12px;line-height:1.5;color:#7b8d80}
+.store-sheet-close{position:absolute;right:16px;top:17px;width:32px;height:32px;padding:0;border:0;border-radius:50%;background:#f2f7f4;color:#71907d;display:grid;place-items:center}
+.store-sheet-close .icon{width:17px;height:17px}
+.store-sheet-summary{flex:none;padding:17px 16px 0}
+.store-sheet-summary .report-summary{margin-bottom:13px}
+.store-sheet-body{flex:1;min-height:0;overflow:hidden;padding:0 16px}
+.store-sheet-body .report-table-scroll{height:100%;max-height:100%}
+.store-sheet-foot{flex:none;padding:12px 16px 25px;text-align:center;color:#85978a;font-size:11px;line-height:1.7;margin:0}
+@keyframes refund-sheet-rise{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@media(max-width:360px){.table-report{padding:17px 12px}.report-unit{font-size:10px}.report-footnote{font-size:10px;gap:8px}.store-sheet-summary{padding-left:12px;padding-right:12px}.store-sheet-body{padding-left:12px;padding-right:12px}}
+@media(prefers-reduced-motion:reduce){.store-sheet{animation:none}}
+/* Keep the interactive phone usable on narrow preview screens. */
+@media(max-width:899px){.stage{display:block;width:100%;min-width:0;min-height:100dvh;padding:0}.phone{width:100%;height:100dvh;min-height:560px;border:0;border-radius:0;box-shadow:none}.requirements-toolbar,.requirements-panel{display:none}}

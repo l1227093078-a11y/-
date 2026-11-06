@@ -1,0 +1,1 @@
+{"name":"refund-table-preview","private":true,"scripts":{"build":"python3 src/build.py","dev":"node src/dev.cjs","test":"node src/verify.cjs"}}
