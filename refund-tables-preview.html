@@ -1196,10 +1196,7 @@ $('#dOk').onclick=()=>{
 };
 $('#btnClear').onclick=()=>{state.mode='product';state.p=[];state.c=[];state.mk=[];state.pm=[];state.range='month';render();};
 $('#pBack').onclick=()=>{if(state.detail==='store'&&state.storeM!==null){state.storeM=null;renderDetail();}else backHome();};
-$('#btnBack').onclick=()=>{
-  const fromReports=document.referrer&&new URL(document.referrer).origin===location.origin&&(/\/(?:reports|index)\.html$/.test(new URL(document.referrer).pathname)||new URL(document.referrer).pathname.endsWith('/'));
-  if(fromReports&&history.length>1)history.back();else location.assign('reports.html?v=20261103-footer-reset-2');
-};
+$('#btnBack').onclick=()=>location.assign('https://l1227093078-a11y.github.io/-/reports.html?v=20261109-menu-links');
 $('#btnHelp').onclick=()=>{helpReturnFocus=document.activeElement;$('#hbox').inert=false;$('#hbox').setAttribute('aria-hidden','false');$('#hmask').classList.add('show');$('#hbox').classList.add('show');lockBackground(true);$('#hClose').focus({preventScroll:true});};
 $('#hClose').onclick=closeHelp;$('#hmask').onclick=closeHelp;
 function closeHelp(){$('#hmask').classList.remove('show');$('#hbox').classList.remove('show');$('#hbox').inert=true;$('#hbox').setAttribute('aria-hidden','true');lockBackground(false);if(helpReturnFocus)helpReturnFocus.focus({preventScroll:true});}
