@@ -9,7 +9,7 @@ function reportTable(firstLabel,body,{label='退款明细',id='reportTableScroll
 function reportSummary(count,unit){return '<div class="report-summary"><span class="report-count">'+icon('category')+'<strong>共 '+count+' '+unit+'</strong></span><span class="report-unit">金额单位：元</span></div>';}
 function reportPage(firstLabel,count,unit,body,label){return '<section class="table-report">'+reportSummary(count,unit)+reportTable(firstLabel,body,{label})+'<p class="report-footnote"><span>按合计金额降序排列</span><span>左右滑动查看全部金额</span></p></section>';}
 function reportEmpty(){return '<tbody><tr class="report-empty"><td colspan="5">当前筛选条件下暂无数据</td></tr></tbody>';}
-function openDetail(k){state.detail=k;state.page='detail';state.storeM=null;state.expCat=[];state.catInit=true;render();$('.pscroll').scrollTop=0;$('#pBack').focus({preventScroll:true});}
+function openDetail(k){state.detail=k;state.page='detail';state.storeM=null;state.expCat=[];state.catInit=true;render();$('.pscroll').scrollTop=0;$('#pTitle').focus({preventScroll:true});}
 function backHome(){closeStoreSheet(false);state.page='home';state.detail=null;state.storeM=null;state.expCat=[];state.catInit=false;render();}
 function renderDetail(){
  const d=state.detail;$('#pTitle').textContent=ENTS.find(e=>e.k===d).t;$('#pCrumb').innerHTML='';

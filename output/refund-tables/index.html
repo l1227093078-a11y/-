@@ -308,6 +308,8 @@ body{background:#edf3ee}
 /* Keep the interactive phone usable on narrow preview screens. */
 @media(max-width:899px){.stage{display:block;width:100%;min-width:0;min-height:100dvh;padding:0}.phone{width:100%;height:100dvh;min-height:560px;border:0;border-radius:0;box-shadow:none}.requirements-toolbar,.requirements-panel{display:none}}
 
+#pTitle:focus{outline:none}
+
 </style>
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iaWNvbiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGFyaWEtaGlkZGVuPSJ0cnVlIj4gPHBhdGggc3Ryb2tlPSJub25lIiBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+IDxwYXRoIGQ9Ik01IDIxdi0xNmEyIDIgMCAwIDEgMiAtMmgxMGEyIDIgMCAwIDEgMiAydjE2bC0zIC0ybC0yIDJsLTIgLTJsLTIgMmwtMiAtMmwtMyAybTQgLTE0aDZtLTYgNGg2bS0yIDRoMiIgLz4gPC9zdmc+">
 </head>
@@ -344,7 +346,7 @@ body{background:#edf3ee}
 
     <!-- 二级页 -->
     <div class="page" id="detailPage" aria-hidden="true" inert>
-      <div class="pnav"><button class="bk" id="pBack"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path stroke="none" d="M0 0h24v24H0z" fill="none"/> <path d="M15 6l-6 6l6 6" /> </svg><span>返回</span></button><div class="ti" id="pTitle"></div></div>
+      <div class="pnav"><button class="bk" id="pBack"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path stroke="none" d="M0 0h24v24H0z" fill="none"/> <path d="M15 6l-6 6l6 6" /> </svg><span>返回</span></button><div class="ti" id="pTitle" tabindex="-1"></div></div>
       <div id="pCrumb"></div>
       <div class="pscroll"><div id="pBody"></div></div>
     </div>
@@ -853,7 +855,7 @@ function reportTable(firstLabel,body,{label='退款明细',id='reportTableScroll
 function reportSummary(count,unit){return '<div class="report-summary"><span class="report-count">'+icon('category')+'<strong>共 '+count+' '+unit+'</strong></span><span class="report-unit">金额单位：元</span></div>';}
 function reportPage(firstLabel,count,unit,body,label){return '<section class="table-report">'+reportSummary(count,unit)+reportTable(firstLabel,body,{label})+'<p class="report-footnote"><span>按合计金额降序排列</span><span>左右滑动查看全部金额</span></p></section>';}
 function reportEmpty(){return '<tbody><tr class="report-empty"><td colspan="5">当前筛选条件下暂无数据</td></tr></tbody>';}
-function openDetail(k){state.detail=k;state.page='detail';state.storeM=null;state.expCat=[];state.catInit=true;render();$('.pscroll').scrollTop=0;$('#pBack').focus({preventScroll:true});}
+function openDetail(k){state.detail=k;state.page='detail';state.storeM=null;state.expCat=[];state.catInit=true;render();$('.pscroll').scrollTop=0;$('#pTitle').focus({preventScroll:true});}
 function backHome(){closeStoreSheet(false);state.page='home';state.detail=null;state.storeM=null;state.expCat=[];state.catInit=false;render();}
 function renderDetail(){
  const d=state.detail;$('#pTitle').textContent=ENTS.find(e=>e.k===d).t;$('#pCrumb').innerHTML='';
@@ -1196,7 +1198,7 @@ $('#dOk').onclick=()=>{
 };
 $('#btnClear').onclick=()=>{state.mode='product';state.p=[];state.c=[];state.mk=[];state.pm=[];state.range='month';render();};
 $('#pBack').onclick=()=>{if(state.detail==='store'&&state.storeM!==null){state.storeM=null;renderDetail();}else backHome();};
-$('#btnBack').onclick=()=>location.assign('https://l1227093078-a11y.github.io/-/reports.html?v=20261109-menu-links');
+$('#btnBack').onclick=()=>location.assign('https://l1227093078-a11y.github.io/-/reports.html?v=20261109-level2-menu');
 $('#btnHelp').onclick=()=>{helpReturnFocus=document.activeElement;$('#hbox').inert=false;$('#hbox').setAttribute('aria-hidden','false');$('#hmask').classList.add('show');$('#hbox').classList.add('show');lockBackground(true);$('#hClose').focus({preventScroll:true});};
 $('#hClose').onclick=closeHelp;$('#hmask').onclick=closeHelp;
 function closeHelp(){$('#hmask').classList.remove('show');$('#hbox').classList.remove('show');$('#hbox').inert=true;$('#hbox').setAttribute('aria-hidden','true');lockBackground(false);if(helpReturnFocus)helpReturnFocus.focus({preventScroll:true});}
