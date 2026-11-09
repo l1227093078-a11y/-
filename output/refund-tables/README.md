@@ -24,3 +24,5 @@
 图标采用Tabler Icons 3.35.0，许可见 THIRD_PARTY_NOTICES.md。
 
 直接HTML入口：`/refund-tables-preview.html`。构建时同时生成目录首页与该独立入口，后者不依赖目录首页解析；原`/refund.html`不修改。
+
+导航修复：从统计首页返回时固定进入站点统一经营报表菜单，不再依赖 referrer 或 history.back，以免回到旧模块菜单。多维明细中的返回仍回到本原型统计首页并保留筛选。
